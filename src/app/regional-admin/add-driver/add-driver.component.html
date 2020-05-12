@@ -1,0 +1,95 @@
+<button class="close" mat-button (click)="onCloseDialog()">x</button>
+
+<body>
+    
+    <h3>Add Driver</h3>
+    <hr>
+    <form #onAddDriverForm="ngForm">
+
+        <div class="form-group">   
+            <label for="driverName">Driver Name</label>
+            <input 
+                type="text" 
+                id="driverName" 
+                class="form-control"
+                name="driverName" 
+                ngModel 
+                #driverNameInput="ngModel" 
+                required> 
+        </div>
+
+        <div class="form-group">   
+            <label for="driverCellNo">Driver Phone Number</label>
+            <input 
+                type="text" 
+                id="driverCellNo" 
+                class="form-control"
+                name="driverCellNo" 
+                ngModel 
+                #driverCellNoInput="ngModel" 
+                required> 
+        </div>
+
+        <div class="form-group">   
+            <label for="driverCnic">Driver CNIC</label>
+            <input 
+                type="text" 
+                id="driverCnic" 
+                class="form-control"
+                name="driverCnic" 
+                ngModel 
+                #driverCnicInput="ngModel" 
+                required> 
+        </div>
+
+        <div class="form-group">   
+            <label for="capacity">Capacity</label>
+            <input 
+                type="number" 
+                id="capacity" 
+                class="form-control"
+                name="capacity" 
+                ngModel 
+                #capacityInput="ngModel" 
+                required> 
+        </div>
+
+        <div class="form-group">   
+            <label for="driverEmail">Driver's Email ID</label>
+            <input 
+                type="driverEmail" 
+                id="driverEmail" 
+                class="form-control"
+                name="driverEmail" 
+                ngModel 
+                #driverEmailInput="ngModel" 
+                required> 
+        </div>
+
+        <div class="form-group">   
+            <label for="driverPassword">Driver Password</label>
+            <input 
+                type="text" 
+                id="driverPassword" 
+                class="form-control"
+                name="driverPassword" 
+                ngModel 
+                #driverPasswordInput="ngModel" 
+                required> 
+        </div>
+
+        <br>
+
+        <div class="parent-flex">
+            <div class="child-flex"></div>
+            <div>
+                <button mat-raised-button color="accent" (click)="onAddDriver(onAddDriverForm)">
+                    + Add Driver
+                </button>
+            </div>    
+        </div>
+
+
+    </form>
+
+</body>

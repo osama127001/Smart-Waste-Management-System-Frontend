@@ -1,0 +1,40 @@
+
+
+
+
+<body>
+
+  <br>
+  <div class="container">
+    <h5>{{adminDetails?.region}}</h5>
+    <hr>
+    <div>
+      <app-maps 
+        [dustbinsData]="dustbinsLocation" 
+        [areaLatitude]="adminDetails?.location.lat" 
+        [areaLongitude]="adminDetails?.location.lng">
+        <!-- [origin]="origin"
+        [destination]="destination"
+        [waypoints]="dustbinsLocationForCollection" -->
+      </app-maps>
+      <br>
+      <div class="parent-flex">
+        <div class="childflex1">
+
+        </div>
+
+        <div class="childflex2">
+          <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="openAddDriverForm()">Add Driver</button>
+        </div>
+
+        <div class="childflex3">
+          <button mat-stroked-button color="primary" (click)="openAddDustbinForm()">Add Dustbin</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+</body>

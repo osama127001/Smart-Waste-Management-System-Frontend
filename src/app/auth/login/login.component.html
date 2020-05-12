@@ -1,0 +1,23 @@
+<body>
+
+  <div class="card">
+    <h1 class="display-4"><strong>Log In</strong></h1>
+    <br><br>
+    <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" placeholder="email@example.com" class="form-control is-valid" id="exampleInputEmail1 inputEmail" aria-describedby="emailHelp" name="email" ngModel #emailInput="ngModel" required email>
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" name="password" ngModel #passwordInput="ngModel" required>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-success">Log In</button>
+    </form>
+  </div>
+
+
+</body>

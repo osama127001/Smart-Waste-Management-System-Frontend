@@ -1,0 +1,41 @@
+.super-admin-container {
+  background-color: #f2f2f2;
+  padding: 70px;
+  height: 90%;
+  border-radius: 15px;
+}
+
+.card {
+  width: 18rem;
+}
+
+mat-expansion-panel {
+  margin-top: 30px;
+}
+
+.region-header {
+  display: flex;
+}
+
+.region-title {
+  flex: 1;
+}
+
+body {
+  height: 2000px;
+  background-color: #e6e6e6;
+}
+
+.action-button {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.action-button-moredetails {
+  margin-top: 10px;
+  height: 60%;
+}
+
+button {
+  outline: none;
+}

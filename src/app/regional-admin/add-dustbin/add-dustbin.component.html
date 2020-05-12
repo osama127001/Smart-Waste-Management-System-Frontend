@@ -1,0 +1,94 @@
+
+
+<button class="close" mat-button (click)="onCloseDialog()">x</button>
+
+<body>
+
+    <h3>Add Dustbin</h3>
+    <hr>
+    <div class="making-form-flex">
+        <div class="form-editing-flex">
+            <form #onAddDustbinForm="ngForm">
+    
+                <div class="form-group">   
+                    <label for="dustbinId">Dustbin ID</label>
+                    <input 
+                        type="text" 
+                        id="dustbinId" 
+                        class="form-control" 
+                        name="dustbinId" 
+                        ngModel 
+                        #dustbinIdInput="ngModel" 
+                        required> 
+                </div>
+        
+                <br>
+        
+                <div class="form-group">
+                    <label for="dustbinAddress">Dustbin Address</label>
+                    <input 
+                        type="text" 
+                        id="dustbinAddress" 
+                        class="form-control" 
+                        name="dustbinAddress" 
+                        ngModel 
+                        #dustbinAddressInput="ngModel" 
+                        required>    
+                </div>
+        
+                <br>
+                
+                <p>Regrion Co-ordinates</p>
+                <hr>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="latitude">Latitude</label>
+                        <input 
+                            type="number" 
+                            class="form-control"
+                            id="latitude"
+                            #latitudeInput="ngModel"
+                            name="latitude"
+                            [(ngModel)]="formLatValue"
+                            ngModel
+                            required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="longitude">Longitude</label>
+                        <input 
+                            type="number" 
+                            class="form-control"
+                            id="longitude"
+                            #latitudeInput="ngModel"
+                            name="longitude"
+                            [(ngModel)]="formLngValue"
+                            ngModel
+                            required>
+                    </div>
+                </div>
+            </form>    
+        </div>
+    
+        <div class="map-editing-flex">
+            <div class="map-border">
+                <agm-map (mapClick)="onMapClick($event)" [latitude]="addAddAdminMapLatitude" [longitude]="addAddAdminMapLongitude" [zoom]="15">
+                    <agm-marker *ngFor="let loc of dustbinLocations" [latitude]="loc.location.lat" [longitude]="loc.location.lng"></agm-marker>
+                    <agm-marker [latitude]="formLatValue" [longitude]="formLngValue" [label]="{ color: 'white', text: '+' }">
+                        <agm-info-window [isOpen]="true">
+                            <p><strong>Add Dustbin Here!</strong></p>
+                        </agm-info-window>
+                    </agm-marker>
+                </agm-map>
+            </div>
+        </div>
+    </div>
+
+    <div class="addDustbinButton" style="display: flex;">
+        <div class="dflex1" style="flex: 1;">
+        </div>
+        <div>
+            <button mat-flat-button color="accent" type="submit" (click)="onAddDustbin(onAddDustbinForm)"> + Add Dustbin</button>
+        </div>
+    </div>
+
+</body>

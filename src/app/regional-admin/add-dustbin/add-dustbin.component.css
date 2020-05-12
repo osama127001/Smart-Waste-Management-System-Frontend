@@ -1,0 +1,36 @@
+.close {
+    outline: none;
+}
+
+body {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+}
+
+.making-form-flex {
+    display: flex;
+}
+
+.form-editing-flex {
+    flex: 1;
+    padding: 20px;
+}
+
+.map-editing-flex {
+    flex: 1;
+    padding: 20px;
+    padding-right: 0;
+}
+
+.map-border {
+    border: 3px solid black;
+}
+
+agm-map {
+    height: 350px;
+}
+
+button {
+    outline: none;
+}

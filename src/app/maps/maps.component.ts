@@ -1,0 +1,69 @@
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { google } from 'google-maps';
+import { Dustbin } from '../dustbins/dustbin.model';
+import { LatLngLiteral } from '@agm/core';
+
+declare var google: google;
+
+@Component({
+  selector: 'app-maps',
+  templateUrl: './maps.component.html',
+  styleUrls: ['./maps.component.css']
+})
+export class MapsComponent implements OnInit {
+
+  // tslint:disable-next-line: no-input-rename
+  @Input('areaLatitude') latitude: number;
+
+  // tslint:disable-next-line: no-input-rename
+  @Input('areaLongitude') longitude: number;
+
+  // tslint:disable-next-line: no-input-rename
+  @Input('dustbinsData') dustbinsData: Dustbin[] = [];
+
+  // origin of the path generated
+  @Input('origin') origin: LatLngLiteral = { lat: 0, lng: 0 };
+
+  // destination of the path generated
+  @Input('destination') destination: LatLngLiteral = { lat: 0, lng: 0 };
+
+  // waypoints of the path generated
+  @Input('waypoints') waypoints: { location: LatLngLiteral, stopover: boolean }[] = [];
+
+
+  zoom = 15;
+  // origin: { lat: number, lng: number } = {
+  //   lat: 33.692386,
+  //   lng: 73.005635
+  // };
+
+  // destination: { lat: number, lng: number } = {
+  //   lat: 33.722854,
+  //   lng: 73.080363
+  // }
+
+  constructor() { }
+
+  ngOnInit() {
+
+  }
+
+  onMapReady(mapInstance) {
+    const trafficLayer = new google.maps.TrafficLayer();
+    trafficLayer.setMap(mapInstance);
+  }
+
+  onMouseOver(infoWindow, gm) {
+    gm.lastOpen = infoWindow;
+    infoWindow.open();
+  }
+
+  onMouseOut(infoWindow, gm) {
+    gm.lastOpen = infoWindow;
+    infoWindow.close();
+  }
+
+
+
+
+}

@@ -1,0 +1,51 @@
+<body>
+  <br><br>
+  <div class="container super-admin-container">
+
+    <div class="region-header">
+      <div class="region-title">
+        <h1 style="margin-right: 70%;">Regions</h1>
+      </div>
+      <div class="region-button">
+        <button mat-raised-button color="primary" (click)="openAddAdminForm()">+ Create Region </button>
+      </div>
+
+    </div>
+  
+    <hr>
+  
+    <mat-spinner *ngIf="allAdminsData.length <= 0"></mat-spinner>
+  
+    <div>
+      <mat-accordion *ngFor="let admin of allAdminsData">
+        <mat-expansion-panel (opened)="panelOpened(admin.regionCode)" (closed)="panelClosed()">
+          <mat-expansion-panel-header [collapsedHeight]="'100px'">
+            <mat-panel-title>
+                <h4>{{admin?.name}}</h4>
+            </mat-panel-title>
+            <mat-panel-description>
+              <h4>{{admin?.region}}</h4>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>map!</p>
+          <app-maps 
+            [dustbinsData]="dustbinsByRegion" 
+            [areaLatitude]='admin?.location.lat' 
+            [areaLongitude]='admin?.location.lng'>
+            <!-- <agm-direction [origin]="origin" destination="destination"></agm-direction> -->
+          </app-maps>
+          <mat-action-row>
+            <button mat-raised-button color="primary" class="action-button action-button-moredetails">More Details</button>
+            <button mat-fab color="warn" class="action-button-delete action-button" aria-label="Example icon button with a delete icon">
+              <mat-icon>delete</mat-icon>
+            </button>    
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  
+  </div>
+  
+  
+
+</body>

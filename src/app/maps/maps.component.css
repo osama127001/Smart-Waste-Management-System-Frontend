@@ -1,0 +1,9 @@
+agm-map {
+  height: 450px;
+}
+
+.borderOfMap {
+  border-style: solid;
+  border-width: thick;
+  border: 5px solid black;
+}

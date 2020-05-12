@@ -1,0 +1,41 @@
+
+.navbar-nav.navbar-center {
+  position: absolute;
+  left: 50%;
+  transform: translatex(-50%);
+}
+
+.navbar-height {
+  height: 80px;
+}
+
+.navbar-brand {
+  font-size: 30px;
+  color: #ff9a00;
+}
+
+.navbar {
+  background-color: #1d2d3c;
+}
+
+li {
+  margin: 10px;
+}
+
+a {
+  color: white;
+  outline: none;
+  text-decoration: none;
+  font-size: large;
+}
+
+a:hover {
+  color: #ff9a00;
+}
+
+.navbar-nav {
+  display: flex;
+}
+
+
+

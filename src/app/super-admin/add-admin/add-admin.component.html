@@ -1,0 +1,60 @@
+<h3>Add Region Details</h3>
+<hr>
+
+<form (submit)=onAddAdmin(onAddAdminForm) #onAddAdminForm="ngForm">
+
+  <div class="form-group">
+    <label for="regionname">Region Name</label>
+    <input type="text" id="regionname" class="form-control" name="regionName" ngModel #regionNameInput="ngModel" required>
+  </div>
+
+  <div class="form-group">
+    <label for="regioncode">Region Code</label>
+    <input type="text" id="regioncode" class="form-control" name="regionCode" ngModel #regionCodeInput="ngModel" required>
+  </div>
+
+  <div class="form-group">
+    <label for="regionadmin">Regional Admin Name</label>
+    <input type="text" id="regionadmin" class="form-control" name="regionAdminName" ngModel #regionAdminNameInput="ngModel" required>
+  </div>
+
+  <div class="form-group">
+    <label for="regionadminemail">Regional Admin Email</label>
+    <input type="email" id="regionadminemail" class="form-control" name="regionAdminEmail" ngModel #regionAdminEmailInput="ngModel" required email>
+  </div>
+
+  <div class="form-group">
+    <label for="regionadminemailpassword">Regional Admin Password</label>
+    <input type="password" id="regionadminemailpassword" class="form-control" name="regionAdminPassword" ngModel #regionAdminPasswordInput="ngModel" required>
+  </div>
+
+  <div class="form-group">
+    <label for="regionadmincellnumber">Regional Admin Phone Number</label>
+    <input type="number" id="regionadmincellnumber" class="form-control" name="regionAdminPhone" ngModel #regionAdminPhoneInput="ngModel" required>
+  </div>
+
+  <div class="form-group">
+    <label for="regionadmincnic">Regional Admin CNIC</label>
+    <input type="number" id="regionadmincnic" class="form-control" name="regionAdminCnic" ngModel #regionAdminCnicInput="ngModel" required>
+  </div>
+
+  <br>
+
+  <p>Enter Region Co-ordinates</p>
+  <hr>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="latitude">Latitude</label>
+      <input type="number" class="form-control" id="latitude" #latitudeInput="ngModel" name="latitude" ngModel required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="longitude">Longitude</label>
+      <input type="number" class="form-control" id="longitude" #longitudeInput="ngModel" name="longitude" ngModel required>
+    </div>
+  </div>
+
+  <div class="createregionbutton">
+    <button mat-raised-button color="accent" type="submit" (click)="refreshSuperAdminPage()">Add Region</button>
+  </div>
+
+</form>
