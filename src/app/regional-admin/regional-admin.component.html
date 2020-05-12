@@ -26,13 +26,21 @@
         <div class="list-of-drivers overflow-auto">
 
           <div class="list-group">
-            <a class="list-group-item list-group-item-action flex-column align-items-start">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">List group item heading</h5>
-                <small>3 days ago</small>
+            <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let driver of driversByRegion">
+              <div class="d-flex justify-content-between">
+                <h5 class="mb-1">{{ driver.name }}</h5>
+                <small>{{ driver.region }}</small>
               </div>
-              <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-              <small>Mention Recent Activity here</small>
+              <p class="mb-1">Capacity: <strong>{{driver.capacity}}</strong></p>
+              <div style="display: flex;">
+                <div style="flex: 1;">
+                  <small>Phone: {{driver.cellNo}}</small>  
+                </div>
+                <div>
+                  <button mat-stroked-button color="basic" *ngIf="!isRouteApplied">Apply Route</button>
+                  <button mat-raised-button color="warn" *ngIf="isRouteApplied">Cancel Route</button>
+                </div>
+              </div>
             </a>
           </div>
 

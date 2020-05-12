@@ -8,6 +8,7 @@ import { LatLngLiteral } from '@agm/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddDustbinComponent } from './add-dustbin/add-dustbin.component';
 import { AddDriverComponent } from './add-driver/add-driver.component';
+import { Driver } from '../driver/driver.model';
 
 @Component({
   selector: 'app-regional-admin',
@@ -23,6 +24,8 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
   private dustbinsLocationForCollection: { location: LatLngLiteral, stopover: boolean }[] = [];
   origin: LatLngLiteral = { lat: 0, lng: 0 };
   destination: LatLngLiteral = { lat: 0, lng: 0 };
+  private driversByRegion: Driver[] = [];
+  private isRouteApplied: boolean = false;
 
 
   constructor(private regionalAdminService: RegionalAdminService, private authService: AuthService, private dialog: MatDialog) {}
@@ -64,7 +67,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
     this.regionalAdminService.getDriversByRegion(regionCode);
     this.regionalAdminService.getAllDriversByRegionUpdated()
       .subscribe(driversData => {
-        console.log(driversData);
+        this.driversByRegion = driversData;
       });
   }
 
