@@ -30,7 +30,8 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
 
   ngOnInit() {
     this.getRegionDetails(localStorage.getItem('regionCode'));  
-    this.getDustbins(localStorage.getItem('regionCode'));  
+    this.getDustbins(localStorage.getItem('regionCode')); 
+    this.getDriverByRegion(localStorage.getItem('regionCode')); 
   }
 
   getRegionDetails(regionCode: string) {
@@ -56,6 +57,14 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
         this.dustbinsLocationForCollection = temp;
         // this.origin = this.dustbinsLocationForCollection[0].location;
         // this.destination = this.dustbinsLocationForCollection[this.dustbinsLocationForCollection.length - 1].location;
+      });
+  }
+
+  getDriverByRegion(regionCode: string) {
+    this.regionalAdminService.getDriversByRegion(regionCode);
+    this.regionalAdminService.getAllDriversByRegionUpdated()
+      .subscribe(driversData => {
+        console.log(driversData);
       });
   }
 

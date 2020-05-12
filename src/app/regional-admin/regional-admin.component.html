@@ -6,7 +6,7 @@
 
   <br>
   <div class="container">
-    <h3 class="display-3">{{adminDetails?.region}}</h3>
+    <h3 class="display-4">{{adminDetails?.region}}</h3>
     <hr>
 
 
@@ -23,8 +23,19 @@
             [waypoints]="dustbinsLocationForCollection" -->
           </app-maps>
         </div>
-        <div class="list-of-drivers">
-          <p>box</p>
+        <div class="list-of-drivers overflow-auto">
+
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">List group item heading</h5>
+                <small>3 days ago</small>
+              </div>
+              <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+              <small>Mention Recent Activity here</small>
+            </a>
+          </div>
+
         </div>
       </div>
       <br>

@@ -4,6 +4,7 @@ import { AuthService } from '../auth/auth.service';
 import { Subject } from 'rxjs';
 import { Admin } from '../admin/admin.model';
 import { Dustbin } from '../dustbins/dustbin.model';
+import { Driver } from '../driver/driver.model';
 
 @Injectable({ providedIn: 'root' })
 export class RegionalAdminService {
@@ -22,6 +23,12 @@ export class RegionalAdminService {
   // All dustbins of a region
   private allDustbinsByRegionData: Dustbin[] = [];
 
+  // Drivers of a region
+  private allDriversByRegion: Driver[] = [];
+
+  // Getting drivers data observable
+  private allDriversByRegionUpdated = new Subject<Driver[]>();
+
   // admin details
   private adminDetails: Admin;
 
@@ -32,6 +39,10 @@ export class RegionalAdminService {
 
   getAllDustbinsByRegionDataListener() {
     return this.allDustBinsUpdated.asObservable();
+  }
+
+  getAllDriversByRegionUpdated() {
+    return this.allDriversByRegionUpdated.asObservable();
   }
 
   getRegionAdminDetails(regionCode: string) {
@@ -47,6 +58,14 @@ export class RegionalAdminService {
       .subscribe((responseData) => {
         this.allDustbinsByRegionData = responseData.dustbins;
         this.allDustBinsUpdated.next([...this.allDustbinsByRegionData]);
+      });
+  }
+
+  getDriversByRegion(region: string) {
+    this.http.get<{ message: string, driversData: Driver[] }>(this.backendLink + '/api/driver/get-driver-by-region/' + region)
+      .subscribe((response) => {
+        this.allDriversByRegion = response.driversData;
+        this.allDriversByRegionUpdated.next([...this.allDriversByRegion]);
       });
   }
 

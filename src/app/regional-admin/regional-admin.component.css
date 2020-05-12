@@ -6,16 +6,16 @@
     padding-top: 40px;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1600px) {
     .container{
-        max-width: 1200px;
+        max-width: 1400px;
     }
 }
 
 
 body {
     background-color: #e6e6e6;
-    height: 800px;
+    height: 803px;
 }
 
 button {
@@ -35,14 +35,15 @@ button {
 }
 
 .map-of-parent {
-    flex: 3;
+    flex: 7;
     margin-right: 5px;
 }
 
 .list-of-drivers {
-    flex: 1;
+    flex: 3;
     border: 3px solid black;
     margin-left: 5px;
+    height: 455px;
 }
 
 hr {
