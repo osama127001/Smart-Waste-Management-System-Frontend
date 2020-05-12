@@ -7,4 +7,5 @@ export interface Driver {
     capacity: number;
     emailId: string;
     password: string;
+    isRouteAssigned: boolean;
 }

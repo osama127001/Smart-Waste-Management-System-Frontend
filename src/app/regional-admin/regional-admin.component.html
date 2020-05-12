@@ -6,7 +6,14 @@
 
   <br>
   <div class="container">
-    <h3 class="display-4">{{adminDetails?.region}}</h3>
+    <div style="display: flex;">
+      <div style="border-right: 1px solid black; padding-right: 50px;">
+        <h3 class="display-4">{{adminDetails?.region}}</h3>
+      </div>
+      <div style="flex: 1; padding-left: 50px;">
+        <p class="display-4">{{adminDetails?.name}}</p>
+      </div>  
+    </div>
     <hr>
 
 
@@ -35,7 +42,9 @@
             <a class="list-group-item list-group-item-action flex-column align-items-start driver-list" *ngFor="let driver of driversByRegion">
               <div class="d-flex justify-content-between">
                 <h5 class="mb-1">{{ driver.name }}</h5>
-                <small>{{ driver.region }}</small>
+                <p style="margin-top: 20px;">
+                  <span matBadge="4" matBadgeOverlap="false" style="margin-right: 50px;"></span>
+                </p>
               </div>
               <p class="mb-1">Capacity: <strong>{{driver.capacity}}</strong></p>
               <div style="display: flex;">

@@ -41,13 +41,9 @@ button {
 
 .list-of-drivers {
     flex: 3;
-    border: 2px solid black;
     margin-left: 5px;
 }
 
-.driver-list {
-    width: 100%;
-}
 
 /* hr {
     position: relative; 
