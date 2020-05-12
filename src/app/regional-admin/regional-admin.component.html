@@ -23,13 +23,16 @@
             [waypoints]="dustbinsLocationForCollection" -->
           </app-maps>
         </div>
-        <div class="list-of-drivers overflow-auto" style="display: flex;">
+        <div class="list-of-drivers overflow-auto">
 
-          <div style="margin: auto;">
-            <p *ngIf="driversByRegion.length === 0"><strong>This region has no assigned drivers</strong></p>
+          <div style="display: flex;" *ngIf="driversByRegion.length === 0">
+            <div style="margin: auto;">
+              <p><strong>No Drivers are assigned to this region!</strong></p>
+            </div>
           </div>
+
           <div class="list-group">
-            <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let driver of driversByRegion">
+            <a class="list-group-item list-group-item-action flex-column align-items-start driver-list" *ngFor="let driver of driversByRegion">
               <div class="d-flex justify-content-between">
                 <h5 class="mb-1">{{ driver.name }}</h5>
                 <small>{{ driver.region }}</small>
