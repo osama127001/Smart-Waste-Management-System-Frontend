@@ -41,16 +41,16 @@ button {
 
 .list-of-drivers {
     flex: 3;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     margin-left: 5px;
     min-height: 10px;
 }
 
-hr {
+/* hr {
     position: relative; 
     top: 20px; 
     border: none; 
     height: 2px; 
     background: black; 
     margin-bottom: 50px;
-}
+} */

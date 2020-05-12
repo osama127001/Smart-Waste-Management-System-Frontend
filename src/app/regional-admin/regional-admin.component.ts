@@ -86,6 +86,14 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
     });
   }
 
+  onClickApplyRoute() {
+    this.isRouteApplied = !this.isRouteApplied;
+  }
+
+  onClickCancelRoute() {
+    this.isRouteApplied = !this.isRouteApplied
+  }
+
   ngOnDestroy() {
     this.adminDetailsSub.unsubscribe();
   }

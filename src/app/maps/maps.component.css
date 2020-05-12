@@ -5,5 +5,5 @@ agm-map {
 .borderOfMap {
   border-style: solid;
   border-width: thick;
-  border: 3px solid black;
+  border: 1px solid black;
 }

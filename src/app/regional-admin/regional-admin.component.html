@@ -23,8 +23,11 @@
             [waypoints]="dustbinsLocationForCollection" -->
           </app-maps>
         </div>
-        <div class="list-of-drivers overflow-auto">
+        <div class="list-of-drivers overflow-auto" style="display: flex;">
 
+          <div style="margin: auto;">
+            <p *ngIf="driversByRegion.length === 0"><strong>This region has no assigned drivers</strong></p>
+          </div>
           <div class="list-group">
             <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let driver of driversByRegion">
               <div class="d-flex justify-content-between">
@@ -37,8 +40,8 @@
                   <small>Phone: {{driver.cellNo}}</small>  
                 </div>
                 <div>
-                  <button mat-stroked-button color="basic" *ngIf="!isRouteApplied">Apply Route</button>
-                  <button mat-raised-button color="warn" *ngIf="isRouteApplied">Cancel Route</button>
+                  <button mat-stroked-button color="basic" *ngIf="!isRouteApplied" (click)="onClickApplyRoute()">Apply Route</button>
+                  <button mat-raised-button color="warn" *ngIf="isRouteApplied" (click)="onClickCancelRoute()">Cancel Route</button>
                 </div>
               </div>
             </a>
@@ -46,18 +49,18 @@
 
         </div>
       </div>
-      <br>
+      <hr>
       <div class="parent-flex">
         <div class="childflex1">
 
         </div>
 
         <div class="childflex2">
-          <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="openAddDriverForm()">Add Driver</button>
+          <button mat-raised-button color="accent" style="margin-right: 10px;" (click)="openAddDriverForm()">Add Driver</button>
         </div>
 
         <div class="childflex3">
-          <button mat-stroked-button color="primary" (click)="openAddDustbinForm()">Add Dustbin</button>
+          <button mat-raised-button color="accent" (click)="openAddDustbinForm()">Add Dustbin</button>
         </div>
 
       </div>
