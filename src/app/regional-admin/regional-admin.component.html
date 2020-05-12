@@ -6,17 +6,27 @@
 
   <br>
   <div class="container">
-    <h5>{{adminDetails?.region}}</h5>
+    <h3 class="display-3">{{adminDetails?.region}}</h3>
     <hr>
+
+
+
     <div>
-      <app-maps 
-        [dustbinsData]="dustbinsLocation" 
-        [areaLatitude]="adminDetails?.location.lat" 
-        [areaLongitude]="adminDetails?.location.lng">
-        <!-- [origin]="origin"
-        [destination]="destination"
-        [waypoints]="dustbinsLocationForCollection" -->
-      </app-maps>
+      <div class="map-and-driver-list-parent">
+        <div class="map-of-parent">
+          <app-maps 
+            [dustbinsData]="dustbinsLocation" 
+            [areaLatitude]="adminDetails?.location.lat" 
+            [areaLongitude]="adminDetails?.location.lng">
+            <!-- [origin]="origin"
+            [destination]="destination"
+            [waypoints]="dustbinsLocationForCollection" -->
+          </app-maps>
+        </div>
+        <div class="list-of-drivers">
+          <p>box</p>
+        </div>
+      </div>
       <br>
       <div class="parent-flex">
         <div class="childflex1">

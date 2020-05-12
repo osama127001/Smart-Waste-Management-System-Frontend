@@ -6,6 +6,12 @@
     padding-top: 40px;
 }
 
+@media (min-width: 1200px) {
+    .container{
+        max-width: 1200px;
+    }
+}
+
 
 body {
     background-color: #e6e6e6;
@@ -22,4 +28,28 @@ button {
 
 .childflex1 {
     flex: 1;
+}
+
+.map-and-driver-list-parent {
+    display: flex;
+}
+
+.map-of-parent {
+    flex: 3;
+    margin-right: 5px;
+}
+
+.list-of-drivers {
+    flex: 1;
+    border: 3px solid black;
+    margin-left: 5px;
+}
+
+hr {
+    position: relative; 
+    top: 20px; 
+    border: none; 
+    height: 3px; 
+    background: black; 
+    margin-bottom: 50px;
 }
