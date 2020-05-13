@@ -25,7 +25,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
   origin: LatLngLiteral = { lat: 0, lng: 0 };
   destination: LatLngLiteral = { lat: 0, lng: 0 };
   private driversByRegion: Driver[] = [];
-  private isRouteApplied: boolean = false;
+  private isRouteApplied: boolean;
 
 
   constructor(private regionalAdminService: RegionalAdminService, private authService: AuthService, private dialog: MatDialog) {}
@@ -86,13 +86,11 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
     });
   }
 
-  onClickApplyRoute() {
-    this.isRouteApplied = !this.isRouteApplied;
+  onToggleRouteAssigned(email: string) {
+    this.regionalAdminService.toggleDriverRouteAssigned({emailId: email});
+    window.location.reload();
   }
 
-  onClickCancelRoute() {
-    this.isRouteApplied = !this.isRouteApplied
-  }
 
   ngOnDestroy() {
     this.adminDetailsSub.unsubscribe();

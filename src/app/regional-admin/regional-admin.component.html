@@ -52,8 +52,8 @@
                   <small>Phone: {{driver.cellNo}}</small>  
                 </div>
                 <div>
-                  <button mat-stroked-button color="basic" *ngIf="!isRouteApplied" (click)="onClickApplyRoute()">Apply Route</button>
-                  <button mat-raised-button color="warn" *ngIf="isRouteApplied" (click)="onClickCancelRoute()">Cancel Route</button>
+                  <button mat-stroked-button color="basic" *ngIf="!driver.isRouteAssigned" (click)="onToggleRouteAssigned(driver.emailId)">Apply Route</button>
+                  <button mat-raised-button color="warn" *ngIf="driver.isRouteAssigned" (click)="onToggleRouteAssigned(driver.emailId)">Cancel Route</button>
                 </div>
               </div>
             </a>

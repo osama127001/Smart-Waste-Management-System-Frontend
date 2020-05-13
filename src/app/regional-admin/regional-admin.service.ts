@@ -83,5 +83,12 @@ export class RegionalAdminService {
       });
   }
 
+  toggleDriverRouteAssigned(email: {emailId: string}) {
+    this.http.put<{message: string}>(this.backendLink + '/api/driver/toggle-route-assigned', email)
+      .subscribe(response => {
+        console.log(response);
+      });
+  }
+
 
 }
