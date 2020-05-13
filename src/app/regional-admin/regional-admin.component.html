@@ -5,7 +5,7 @@
 <body>
 
   <br>
-  <div class="container">
+  <div class="container" style="border: 1px solid black;">
     <div style="display: flex;">
       <div style="border-right: 1px solid black; padding-right: 50px;">
         <h3 class="display-4">{{adminDetails?.region}}</h3>
@@ -15,8 +15,6 @@
       </div>  
     </div>
     <hr>
-
-
 
     <div>
       <div class="map-and-driver-list-parent">
@@ -38,8 +36,8 @@
             </div>
           </div>
 
-          <div class="list-group">
-            <a class="list-group-item list-group-item-action flex-column align-items-start driver-list" *ngFor="let driver of driversByRegion">
+          <div class="list-group" style="border: 1px solid black;">
+            <a class="list-group-item list-group-item-action flex-column align-items-start driver-list" *ngFor="let driver of driversByRegion" style="background-color: #f2f2f2;">
               <div class="d-flex justify-content-between">
                 <h5 class="mb-1">{{ driver.name }}</h5>
                 <p style="margin-top: 20px;">
