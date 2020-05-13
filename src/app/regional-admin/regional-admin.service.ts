@@ -20,6 +20,9 @@ export class RegionalAdminService {
   // getting Dustbins Data observable
   private allDustBinsUpdated = new Subject<Dustbin[]>();
 
+  // getting region Code
+  private routeAssignedUpdated = new Subject<any>();
+
   // All dustbins of a region
   private allDustbinsByRegionData: Dustbin[] = [];
 
@@ -33,6 +36,10 @@ export class RegionalAdminService {
   private adminDetails: Admin;
 
   
+  getRouteAssignedListener() {
+    return this.routeAssignedUpdated.asObservable();
+  }
+
   getRegionalAdminDetailsListener() {
       return this.regionalAdminDetailsUpdated.asObservable();
   }
@@ -86,7 +93,7 @@ export class RegionalAdminService {
   toggleDriverRouteAssigned(email: {emailId: string}) {
     this.http.put<{message: string}>(this.backendLink + '/api/driver/toggle-route-assigned', email)
       .subscribe(response => {
-        console.log(response);
+        this.routeAssignedUpdated.next(response);
       });
   }
 

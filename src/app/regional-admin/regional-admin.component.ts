@@ -94,7 +94,10 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
 
   onToggleRouteAssigned(email: string) {
     this.regionalAdminService.toggleDriverRouteAssigned({emailId: email});
-    window.location.reload();
+    this.regionalAdminService.getRouteAssignedListener()
+      .subscribe(data => {
+        this.getDriverByRegion(localStorage.getItem('regionCode'));
+      });
   }
 
 
