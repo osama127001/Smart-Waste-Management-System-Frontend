@@ -29,7 +29,7 @@ import { AuthIntercerptor } from './auth/auth-interceptor';
 import { AgmDirectionModule } from 'agm-direction';
 import { AddDustbinComponent } from './regional-admin/add-dustbin/add-dustbin.component';
 import { AddDriverComponent } from './regional-admin/add-driver/add-driver.component';
-import { MatBadgeModule } from '@angular/material/badge';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -58,7 +58,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     AgmDirectionModule,
     MatInputModule,
     MatExpansionModule,
-    MatBadgeModule,
+    MatChipsModule,
     MatIconModule,
     MatDialogModule,
     MatFormFieldModule,

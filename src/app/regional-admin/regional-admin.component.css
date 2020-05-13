@@ -27,7 +27,7 @@ button {
 }
 
 .childflex1 {
-    flex: 1;
+    flex: 7;
 }
 
 .map-and-driver-list-parent {
@@ -42,6 +42,7 @@ button {
 .list-of-drivers {
     flex: 3;
     margin-left: 5px;
+    height: 450px;
 }
 
 

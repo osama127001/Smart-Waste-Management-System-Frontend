@@ -25,8 +25,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
   origin: LatLngLiteral = { lat: 0, lng: 0 };
   destination: LatLngLiteral = { lat: 0, lng: 0 };
   private driversByRegion: Driver[] = [];
-  private isRouteApplied: boolean;
-
+  private driversForRouteAssigned: Driver[] = [];
 
   constructor(private regionalAdminService: RegionalAdminService, private authService: AuthService, private dialog: MatDialog) {}
 
@@ -68,6 +67,13 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
     this.regionalAdminService.getAllDriversByRegionUpdated()
       .subscribe(driversData => {
         this.driversByRegion = driversData;
+        var temp: Driver[] = [];
+        for (let i = 0; i < this.driversByRegion.length; i++ ) {
+          if (this.driversByRegion[i].isRouteAssigned) {
+            temp.push(this.driversByRegion[i]);
+          }
+        }
+        this.driversForRouteAssigned = temp;
       });
   }
 

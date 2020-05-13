@@ -43,7 +43,7 @@
               <div class="d-flex justify-content-between">
                 <h5 class="mb-1">{{ driver.name }}</h5>
                 <p style="margin-top: 20px;">
-                  <span matBadge="4" matBadgeOverlap="false" style="margin-right: 50px;"></span>
+                  <span class="badge badge-primary">5</span>
                 </p>
               </div>
               <p class="mb-1">Capacity: <strong>{{driver.capacity}}</strong></p>
@@ -64,16 +64,22 @@
       <hr>
       <div class="parent-flex">
         <div class="childflex1">
-
+          <mat-chip-list>
+            <mat-chip *ngFor="let driver of driversForRouteAssigned">{{driver.name}}</mat-chip>
+          </mat-chip-list>
         </div>
 
-        <div class="childflex2">
-          <button mat-raised-button color="accent" style="margin-right: 10px;" (click)="openAddDriverForm()">Add Driver</button>
+        <div class="childflex2" style="flex: 3;">
+          <div style="display: flex;">
+            <div style="flex: 1;"></div>
+            <div>
+              <button mat-raised-button color="accent" style="margin-right: 10px;" (click)="openAddDriverForm()">Add Driver</button>
+              <button mat-raised-button color="accent" (click)="openAddDustbinForm()">Add Dustbin</button>    
+            </div>
+
+          </div>
         </div>
 
-        <div class="childflex3">
-          <button mat-raised-button color="accent" (click)="openAddDustbinForm()">Add Dustbin</button>
-        </div>
 
       </div>
 
