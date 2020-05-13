@@ -20,12 +20,16 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
 
   private adminDetails: Admin;
   private adminDetailsSub: Subscription;
+  private routeAssignedSub: Subscription;
+  private dustbinSub: Subscription;
+  private driverSub: Subscription;
   private dustbinsLocation: Dustbin[] = [];
   private dustbinsLocationForCollection: { location: LatLngLiteral, stopover: boolean }[] = [];
   origin: LatLngLiteral = { lat: 0, lng: 0 };
   destination: LatLngLiteral = { lat: 0, lng: 0 };
   private driversByRegion: Driver[] = [];
   private driversForRouteAssigned: Driver[] = [];
+  private isAssignindLoading: boolean = false;
 
   constructor(private regionalAdminService: RegionalAdminService, private authService: AuthService, private dialog: MatDialog) {}
 
@@ -47,7 +51,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
 
   getDustbins(region: string) {
     this.regionalAdminService.getAllDustbinsByRegion(region);
-    this.regionalAdminService.getAllDustbinsByRegionDataListener()
+    this.dustbinSub = this.regionalAdminService.getAllDustbinsByRegionDataListener()
       .subscribe((dustbinData) => {
         this.dustbinsLocation = dustbinData;
         var temp: { location: LatLngLiteral, stopover: boolean } [] = [];
@@ -64,7 +68,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
 
   getDriverByRegion(regionCode: string) {
     this.regionalAdminService.getDriversByRegion(regionCode);
-    this.regionalAdminService.getAllDriversByRegionUpdated()
+    this.driverSub = this.regionalAdminService.getAllDriversByRegionUpdated()
       .subscribe(driversData => {
         this.driversByRegion = driversData;
         var temp: Driver[] = [];
@@ -74,6 +78,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
           }
         }
         this.driversForRouteAssigned = temp;
+        console.log(this.driversForRouteAssigned);
       });
   }
 
@@ -93,16 +98,23 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
   }
 
   onToggleRouteAssigned(email: string) {
+    this.driverSub.unsubscribe();
+    this.isAssignindLoading = true;
     this.regionalAdminService.toggleDriverRouteAssigned({emailId: email});
-    this.regionalAdminService.getRouteAssignedListener()
+    this.routeAssignedSub = this.regionalAdminService.getRouteAssignedListener()
       .subscribe(data => {
         this.getDriverByRegion(localStorage.getItem('regionCode'));
+        this.isAssignindLoading = false;        
       });
   }
 
 
   ngOnDestroy() {
     this.adminDetailsSub.unsubscribe();
+    this.routeAssignedSub.unsubscribe();
+    this.dustbinSub.unsubscribe();
+    this.driverSub.unsubscribe();
   }
+
 
 }

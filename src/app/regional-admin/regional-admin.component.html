@@ -19,7 +19,7 @@
     <div>
       <div class="map-and-driver-list-parent">
         <div class="map-of-parent">
-          <app-maps 
+          <app-maps
             [dustbinsData]="dustbinsLocation" 
             [areaLatitude]="adminDetails?.location.lat" 
             [areaLongitude]="adminDetails?.location.lng">
@@ -40,6 +40,7 @@
             <a class="list-group-item list-group-item-action flex-column align-items-start driver-list" *ngFor="let driver of driversByRegion" style="background-color: #f2f2f2;">
               <div class="d-flex justify-content-between">
                 <h5 class="mb-1">{{ driver.name }}</h5>
+                
                 <p style="margin-top: 20px;">
                   <span class="badge badge-primary">5</span>
                 </p>
@@ -64,9 +65,11 @@
         <div class="childflex1">
           <mat-chip-list>
             <mat-chip *ngFor="let driver of driversForRouteAssigned">{{driver.name}}</mat-chip>
+            <div class="spinner-border" role="status" *ngIf="isAssignindLoading" style="margin-left: 20px;">
+              <span class="sr-only">Loading...</span>
+            </div>
           </mat-chip-list>
         </div>
-
         <div class="childflex2" style="flex: 3;">
           <div style="display: flex;">
             <div style="flex: 1;"></div>
