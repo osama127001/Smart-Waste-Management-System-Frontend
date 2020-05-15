@@ -61,7 +61,7 @@ export class AuthService {
   userLogin(data: { email: string, password: string }) {
     // check the domain of the email to send the request respectively.
     if (data.email.split('@')[1] === 'superadmin.com' || data.email.split('@')[1] === 'admin.com') {
-      this.http.post<{ message: string, user: string, token: string, expiresIn: number, regionData: Admin }>(this.backendLink + '/api/admin/adminlogin', data)
+      this.http.post<{ message: string, user: string, token: string, expiresIn: number, regionCode: string }>(this.backendLink + '/api/admin/adminlogin', data)
         .subscribe((response) => {
           console.log(response);
           const token = response.token;
@@ -78,8 +78,8 @@ export class AuthService {
             this.router.navigate(['/superadmin']);
           } else {
             // this.adminRegionCodeListener.next(response.regionCode);
-            localStorage.setItem('regionCode', response.regionData.regionCode);
-            localStorage.setItem('region', response.regionData.region);
+            localStorage.setItem('regionCode', response.regionCode);
+            localStorage.setItem('region', response.regionCode);
             this.router.navigate(['/regionaladmin']);
           }
         });

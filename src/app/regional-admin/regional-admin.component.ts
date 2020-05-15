@@ -30,12 +30,13 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
   private driversByRegion: Driver[] = [];
   private driversForRouteAssigned: Driver[] = [];
   private isAssignindLoading: boolean = false;
+  private atLeastOneDriverAssigned: boolean = false;
 
   constructor(private regionalAdminService: RegionalAdminService, private authService: AuthService, private dialog: MatDialog) {}
 
 
   ngOnInit() {
-    this.getRegionDetails(localStorage.getItem('regionCode'));  
+    this.getRegionDetails(localStorage.getItem('regionCode'));
     this.getDustbins(localStorage.getItem('regionCode')); 
     this.getDriverByRegion(localStorage.getItem('regionCode')); 
   }
@@ -75,10 +76,10 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
         for (let i = 0; i < this.driversByRegion.length; i++ ) {
           if (this.driversByRegion[i].isRouteAssigned) {
             temp.push(this.driversByRegion[i]);
+            this.atLeastOneDriverAssigned = true;
           }
         }
         this.driversForRouteAssigned = temp;
-        console.log(this.driversForRouteAssigned);
       });
   }
 
@@ -106,12 +107,15 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
         this.getDriverByRegion(localStorage.getItem('regionCode'));
         this.isAssignindLoading = false;        
       });
+      window.location.reload();
   }
 
 
   ngOnDestroy() {
     this.adminDetailsSub.unsubscribe();
-    this.routeAssignedSub.unsubscribe();
+    if (this.atLeastOneDriverAssigned) {
+      this.routeAssignedSub.unsubscribe();
+    }
     this.dustbinSub.unsubscribe();
     this.driverSub.unsubscribe();
   }

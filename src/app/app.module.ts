@@ -30,6 +30,8 @@ import { AgmDirectionModule } from 'agm-direction';
 import { AddDustbinComponent } from './regional-admin/add-dustbin/add-dustbin.component';
 import { AddDriverComponent } from './regional-admin/add-driver/add-driver.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatInputModule,
     MatExpansionModule,
     MatChipsModule,
+    MatMenuModule,
     MatIconModule,
     MatDialogModule,
     MatFormFieldModule,

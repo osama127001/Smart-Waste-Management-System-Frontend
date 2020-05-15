@@ -3,7 +3,6 @@
 
 
 <body>
-
   <br>
   <div class="container" style="border: 1px solid black;">
     <div style="display: flex;">
@@ -15,7 +14,6 @@
       </div>  
     </div>
     <hr>
-
     <div>
       <div class="map-and-driver-list-parent">
         <div class="map-of-parent">
@@ -29,20 +27,24 @@
           </app-maps>
         </div>
         <div class="list-of-drivers overflow-auto">
-
           <div style="display: flex;" *ngIf="driversByRegion.length === 0">
             <div style="margin: auto;">
               <p><strong>No Drivers are assigned to this region!</strong></p>
             </div>
           </div>
-
           <div class="list-group" style="border: 1px solid black;">
             <a class="list-group-item list-group-item-action flex-column align-items-start driver-list" *ngFor="let driver of driversByRegion" style="background-color: #f2f2f2;">
+              <button class="close" aria-label="Example icon button with a vertical three dot icon" [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>Edit</button>
+                <button mat-menu-item>Delete</button>
+              </mat-menu>
               <div class="d-flex justify-content-between">
                 <h5 class="mb-1">{{ driver.name }}</h5>
-                
                 <p style="margin-top: 20px;">
-                  <span class="badge badge-primary">5</span>
+                  <!-- <span class="badge badge-primary">5</span> -->
                 </p>
               </div>
               <p class="mb-1">Capacity: <strong>{{driver.capacity}}</strong></p>
@@ -57,7 +59,6 @@
               </div>
             </a>
           </div>
-
         </div>
       </div>
       <hr>
@@ -77,15 +78,9 @@
               <button mat-raised-button color="accent" style="margin-right: 10px;" (click)="openAddDriverForm()">Add Driver</button>
               <button mat-raised-button color="accent" (click)="openAddDustbinForm()">Add Dustbin</button>    
             </div>
-
           </div>
         </div>
-
-
       </div>
-
     </div>
   </div>
-
-
 </body>
