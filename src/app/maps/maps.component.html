@@ -14,19 +14,19 @@
         (mouseOut)="onMouseOut(infoWindow, gm)">
 
         <agm-info-window #infoWindow>
-          <div>
-            <h4><strong><u>Details</u></strong></h4>
+          <div style="margin-bottom: 10px;">
+            <h5><kbd>Details</kbd></h5>
           </div>
           <div>
-            <h6><strong>Dustbin ID:</strong>    {{ dustbinData.id }}</h6>
-            <h6><strong>Region:</strong>        {{ dustbinData.region }}</h6>
-            <h6><strong>Address:</strong>       {{ dustbinData.address }}</h6>
-            <h5><strong>Status:</strong>  <kbd>{{ dustbinData.status }}%</kbd></h5>
+            <p><strong>Dustbin ID: </strong>{{ dustbinData.id }}</p>
+            <p><strong>Region: </strong>{{ dustbinData.region }}</p>
+            <p><strong>Address: </strong>{{ dustbinData.address }}</p>
+            <p><strong>Status: </strong><kbd>{{ dustbinData.status }}</kbd></p>
           </div>
         </agm-info-window>
 
       </agm-marker>
-
+ß
     </agm-map>
   </div>
 
