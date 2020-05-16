@@ -24,6 +24,8 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
   private dustbinSub: Subscription;
   private driverSub: Subscription;
   private dustbinsLocation: Dustbin[] = [];
+  private dustbinLocationForRouteCalculation: Dustbin[] = [];
+  private driverDetailsForChips: any[] = [];
   private dustbinsLocationForCollection: { location: LatLngLiteral, stopover: boolean }[] = [];
   origin: LatLngLiteral = { lat: 0, lng: 0 };
   destination: LatLngLiteral = { lat: 0, lng: 0 };
@@ -37,7 +39,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
 
   ngOnInit() {
     this.getRegionDetails(localStorage.getItem('regionCode'));
-    this.getDustbins(localStorage.getItem('regionCode')); 
+    this.getDustbinsForLocation(localStorage.getItem('regionCode')); 
     this.getDriverByRegion(localStorage.getItem('regionCode')); 
   }
 
@@ -46,24 +48,14 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
     this.adminDetailsSub = this.regionalAdminService.getRegionalAdminDetailsListener()
       .subscribe((adminDetailsResponse) => {
         this.adminDetails = adminDetailsResponse;
-        console.log(this.adminDetails);
       });
   }
 
-  getDustbins(region: string) {
+  getDustbinsForLocation(region: string) {
     this.regionalAdminService.getAllDustbinsByRegion(region);
     this.dustbinSub = this.regionalAdminService.getAllDustbinsByRegionDataListener()
       .subscribe((dustbinData) => {
         this.dustbinsLocation = dustbinData;
-        var temp: { location: LatLngLiteral, stopover: boolean } [] = [];
-        for (let i = 0; i < dustbinData.length; i++) {
-          if (dustbinData[i].status > 50) {
-            temp.push({ location: dustbinData[i].location, stopover: dustbinData[i].stopover });
-          }
-        }
-        this.dustbinsLocationForCollection = temp;
-        // this.origin = this.dustbinsLocationForCollection[0].location;
-        // this.destination = this.dustbinsLocationForCollection[this.dustbinsLocationForCollection.length - 1].location;
       });
   }
 
@@ -72,14 +64,23 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
     this.driverSub = this.regionalAdminService.getAllDriversByRegionUpdated()
       .subscribe(driversData => {
         this.driversByRegion = driversData;
-        var temp: Driver[] = [];
-        for (let i = 0; i < this.driversByRegion.length; i++ ) {
-          if (this.driversByRegion[i].isRouteAssigned) {
-            temp.push(this.driversByRegion[i]);
-            this.atLeastOneDriverAssigned = true;
+        var temp: {driverName: string, driverEmail: string, driverCapacity: number}[] = [];
+        this.driversByRegion.forEach(element => {
+          if (element.isRouteAssigned) {
+            temp.push({ driverName: element.name, driverEmail: element.emailId, driverCapacity: element.capacity });
           }
-        }
-        this.driversForRouteAssigned = temp;
+        });
+        this.driverDetailsForChips = temp;
+        this.calculateRouteForDriver(temp);
+      });
+  }
+
+  calculateRouteForDriver(driverDetailsForRouteCalculation: any) {
+    this.regionalAdminService.getAllDustbinsByRegion(localStorage.getItem('regionCode'));
+    this.regionalAdminService.getAllDustbinsByRegionDataListener()
+      .subscribe(dustbinLocations => {
+        this.dustbinLocationForRouteCalculation = dustbinLocations;
+        console.log(driverDetailsForRouteCalculation);
       });
   }
 
