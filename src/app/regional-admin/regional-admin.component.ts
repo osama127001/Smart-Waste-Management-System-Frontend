@@ -76,7 +76,8 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
       });
   }
 
-  calculateRouteForDrivers(driverDetailsForRouteCalculation: any) {
+  calculateRouteForDrivers(driverDetails: any) {
+    var driverDetailsForRouteCalculation: {driverName: string, driverEmail: string, driverCapacity: number}[] = driverDetails;
     this.regionalAdminService.getAllDustbinsByRegion(localStorage.getItem('regionCode'));
     this.regionalAdminService.getAllDustbinsByRegionDataListener()
       .subscribe(dustbinLocations => {
@@ -89,13 +90,19 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
         });
         for (let i = 0; i < driverDetailsForRouteCalculation.length; i++) {
           var temp: any[] = [];
-          for (let i = 0; i < driverDetailsForRouteCalculation[i].driverCapacity; i++) {
-            temp[i] = tempDustbinsToCollect[i];
+          var temp2: any;
+          if (tempDustbinsToCollect.length < driverDetailsForRouteCalculation[i].driverCapacity) {
+            temp2 = tempDustbinsToCollect.length;
+          } else {
+            temp2 = driverDetailsForRouteCalculation[i].driverCapacity;
           }
-          this.routeAssignedList.push({ driverName: driverDetailsForRouteCalculation.driverName, dustbinsAssigned: temp});
-          tempDustbinsToCollect.splice();
+          for (let j = 0; j < temp2; j++) {
+            temp[j] = tempDustbinsToCollect[j];
+          }
+          this.routeAssignedList.push({ driverName: driverDetailsForRouteCalculation[i].driverName, dustbinsAssigned: temp});
+          tempDustbinsToCollect.splice(tempDustbinsToCollect.indexOf(temp[0]), tempDustbinsToCollect.indexOf(temp[temp.length - 1]));
         }
-        console.log(tempDustbinsToCollect);
+        console.log(this.routeAssignedList);
       });
   }
 
