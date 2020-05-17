@@ -99,8 +99,11 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
           for (let j = 0; j < temp2; j++) {
             temp[j] = tempDustbinsToCollect[j];
           }
-          this.routeAssignedList.push({ driverName: driverDetailsForRouteCalculation[i].driverName, dustbinsAssigned: temp});
-          tempDustbinsToCollect.splice(tempDustbinsToCollect.indexOf(temp[0]), tempDustbinsToCollect.indexOf(temp[temp.length - 1]));
+          // check not add if already available!
+          var a = temp.indexOf(temp[0]);
+          var b = temp.indexOf(temp[temp.length - 1])
+          this.routeAssignedList.push({ driverName: driverDetailsForRouteCalculation[i].driverName, dustbinsAssigned: temp });
+          tempDustbinsToCollect.splice(a, b - a + 1);
         }
         console.log(this.routeAssignedList);
       });
