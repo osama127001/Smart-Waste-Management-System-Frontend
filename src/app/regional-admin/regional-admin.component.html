@@ -1,7 +1,5 @@
 
 
-
-
 <body>
   <br>
   <div class="container" style="border: 1px solid black;">
@@ -84,3 +82,26 @@
     </div>
   </div>
 </body>
+
+<!-- --------------------------- Test --------------------------- -->
+
+<agm-map 
+  [latitude]="routeAssignedList[0]?.dustbinsAssigned[0]?.lat" 
+  [longitude]="routeAssignedList[0]?.dustbinsAssigned[0]?.lng" 
+  [zoom]="15" 
+  style="height: 500px;">
+    <agm-direction *ngFor="let route of routeAssignedList" 
+      [origin]="route?.dustbinsAssigned[0].location"
+      [destination]="route?.dustbinsAssigned[routeAssignedList[0]?.dustbinsAssigned?.length - 1].location"
+      [waypoints]="route?.dustbinsAssigned"
+    ></agm-direction>
+
+</agm-map>
+
+<div *ngFor="let route of routeAssignedList" >
+
+  <p>origin: {{route?.dustbinsAssigned[0]}}</p>
+  <p>destination: {{route?.dustbinsAssigned[routeAssignedList[0]?.dustbinsAssigned?.length - 1]}}</p>
+  <p>waypoints: {{route?.dustbinsAssigned}}</p>
+  
+</div>

@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddDustbinComponent } from './add-dustbin/add-dustbin.component';
 import { AddDriverComponent } from './add-driver/add-driver.component';
 import { Driver } from '../driver/driver.model';
+import { Waypoints } from '../dustbins/waypoints.model';
 
 @Component({
   selector: 'app-regional-admin',
@@ -33,7 +34,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
   private driversForRouteAssigned: Driver[] = [];
   private isAssignindLoading: boolean = false;
   private atLeastOneDriverAssigned: boolean = false;
-  private routeAssignedList: { driverName: string, dustbinsAssigned: Dustbin[] }[] = [];
+  private routeAssignedList: { driverName: string, dustbinsAssigned: Waypoints[] }[] = [];
 
   constructor(private regionalAdminService: RegionalAdminService, private authService: AuthService, private dialog: MatDialog) {}
 
@@ -89,7 +90,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
           }
         });
         for (let i = 0; i < driverDetailsForRouteCalculation.length; i++) {
-          var temp: any[] = [];
+          var temp: Waypoints[] = [];
           var temp2: any;
           if (tempDustbinsToCollect.length < driverDetailsForRouteCalculation[i].driverCapacity) {
             temp2 = tempDustbinsToCollect.length;
@@ -97,7 +98,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
             temp2 = driverDetailsForRouteCalculation[i].driverCapacity;
           }
           for (let j = 0; j < temp2; j++) {
-            temp[j] = tempDustbinsToCollect[j];
+            temp.push({ location: tempDustbinsToCollect[j].location, stopover: true });
           }
           // check not add if already available!
           var a = temp.indexOf(temp[0]);
