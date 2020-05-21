@@ -7,6 +7,8 @@
 
     <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints"></agm-direction>
 
+    <ng-content></ng-content>
+
       <agm-marker *ngFor="let dustbinData of dustbinsData"
         [latitude]="dustbinData.location.lat"
         [longitude]="dustbinData.location.lng"

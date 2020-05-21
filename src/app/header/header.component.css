@@ -1,9 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
 
 .navbar-nav.navbar-center {
   position: absolute;
   left: 50%;
   transform: translatex(-50%);
 }
+
+button {
+  outline: none;
+}
+
 
 .navbar-height {
   height: 80px;
@@ -12,14 +20,16 @@
 .navbar-brand {
   font-size: 30px;
   color: #ff9a00;
+  font-family: 'Fredoka One', cursive;
+  /* font-family: 'Alfa Slab One', cursive; */
 }
 
 .navbar {
-  background-color: #1d2d3c;
+  background-color: #2b3137;
 }
 
 li {
-  margin: 10px;
+  margin: 5px;
 }
 
 a {
@@ -29,13 +39,17 @@ a {
   font-size: large;
 }
 
+
 a:hover {
   color: #ff9a00;
+  border-color: #ff9a00;
 }
 
 .navbar-nav {
   display: flex;
 }
+
+
 
 
 

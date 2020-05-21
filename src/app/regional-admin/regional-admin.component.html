@@ -19,9 +19,6 @@
             [dustbinsData]="dustbinsLocation" 
             [areaLatitude]="adminDetails?.location.lat" 
             [areaLongitude]="adminDetails?.location.lng">
-            <!-- [origin]="origin"
-            [destination]="destination"
-            [waypoints]="dustbinsLocationForCollection" -->
           </app-maps>
         </div>
         <div class="list-of-drivers overflow-auto">
@@ -92,16 +89,8 @@
   style="height: 500px;">
     <agm-direction *ngFor="let route of routeAssignedList" 
       [origin]="route?.dustbinsAssigned[0].location"
-      [destination]="route?.dustbinsAssigned[routeAssignedList[0]?.dustbinsAssigned?.length - 1].location"
+      [destination]="route?.dustbinsAssigned[routeAssignedList[0]?.dustbinsAssigned?.length - 1]?.location"
       [waypoints]="route?.dustbinsAssigned"
     ></agm-direction>
 
 </agm-map>
-
-<div *ngFor="let route of routeAssignedList" >
-
-  <p>origin: {{route?.dustbinsAssigned[0]}}</p>
-  <p>destination: {{route?.dustbinsAssigned[routeAssignedList[0]?.dustbinsAssigned?.length - 1]}}</p>
-  <p>waypoints: {{route?.dustbinsAssigned}}</p>
-  
-</div>
