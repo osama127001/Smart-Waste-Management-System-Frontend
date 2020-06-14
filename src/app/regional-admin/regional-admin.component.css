@@ -37,6 +37,7 @@ button {
 .map-of-parent {
     flex: 7;
     margin-right: 5px;
+    border: 1px solid black;
 }
 
 .list-of-drivers {

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { google } from 'google-maps';
 import { Dustbin } from '../dustbins/dustbin.model';
 import { LatLngLiteral } from '@agm/core';
+import { Waypoints } from '../dustbins/waypoints.model';
 
 declare var google: google;
 
@@ -28,7 +29,8 @@ export class MapsComponent implements OnInit {
   @Input('destination') destination: LatLngLiteral = { lat: 0, lng: 0 };
 
   // waypoints of the path generated
-  @Input('waypoints') waypoints: { location: LatLngLiteral, stopover: boolean }[] = [];
+  @Input('routeAssignedList') routeAssignedList: { driverName: string, dustbinsAssigned: Waypoints[] }[] = [];
+
 
 
   zoom = 15;

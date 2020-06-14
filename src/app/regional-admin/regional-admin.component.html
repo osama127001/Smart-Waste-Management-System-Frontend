@@ -18,7 +18,8 @@
           <app-maps
             [dustbinsData]="dustbinsLocation" 
             [areaLatitude]="adminDetails?.location.lat" 
-            [areaLongitude]="adminDetails?.location.lng">
+            [areaLongitude]="adminDetails?.location.lng"
+            [routeAssignedList]="routeAssignedList">
           </app-maps>
         </div>
         <div class="list-of-drivers overflow-auto">
@@ -79,18 +80,3 @@
     </div>
   </div>
 </body>
-
-<!-- --------------------------- Test --------------------------- -->
-
-<agm-map 
-  [latitude]="routeAssignedList[0]?.dustbinsAssigned[0]?.lat" 
-  [longitude]="routeAssignedList[0]?.dustbinsAssigned[0]?.lng" 
-  [zoom]="15" 
-  style="height: 500px;">
-    <agm-direction *ngFor="let route of routeAssignedList" 
-      [origin]="route?.dustbinsAssigned[0].location"
-      [destination]="route?.dustbinsAssigned[routeAssignedList[0]?.dustbinsAssigned?.length - 1]?.location"
-      [waypoints]="route?.dustbinsAssigned"
-    ></agm-direction>
-
-</agm-map>

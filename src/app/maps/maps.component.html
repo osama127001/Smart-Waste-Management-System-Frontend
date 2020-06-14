@@ -5,9 +5,13 @@
   <div class="borderOfMap border-dark">
     <agm-map #gm (mapReady)="onMapReady($event)" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
 
-    <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints"></agm-direction>
-
-    <ng-content></ng-content>
+      <agm-direction *ngFor="let route of routeAssignedList" 
+       [origin]="route?.dustbinsAssigned[0].location"
+       [destination]="route?.dustbinsAssigned[routeAssignedList[0]?.dustbinsAssigned?.length - 1]?.location"
+       [waypoints]="route?.dustbinsAssigned"
+      ></agm-direction>
+      
+      <ng-content></ng-content>
 
       <agm-marker *ngFor="let dustbinData of dustbinsData"
         [latitude]="dustbinData.location.lat"
