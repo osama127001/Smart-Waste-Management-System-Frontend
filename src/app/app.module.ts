@@ -31,6 +31,7 @@ import { AddDustbinComponent } from './regional-admin/add-dustbin/add-dustbin.co
 import { AddDriverComponent } from './regional-admin/add-driver/add-driver.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
+import { DriverComponent } from './driver/driver.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { MatMenuModule } from '@angular/material/menu';
     AddAdminComponent,
     AddDustbinComponent,
     AddDriverComponent,
+    DriverComponent,
 
   ],
   imports: [
