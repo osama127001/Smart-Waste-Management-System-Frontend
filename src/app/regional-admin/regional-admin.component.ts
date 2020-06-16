@@ -19,22 +19,22 @@ import { Waypoints } from '../dustbins/waypoints.model';
 export class RegionalAdminComponent implements OnInit , OnDestroy {
 
 
-  private adminDetails: Admin;
+  adminDetails: Admin;
   private adminDetailsSub: Subscription;
   private routeAssignedSub: Subscription;
   private dustbinSub: Subscription;
   private driverSub: Subscription;
-  private dustbinsLocation: Dustbin[] = [];
+  dustbinsLocation: Dustbin[] = [];
   private dustbinLocationForRouteCalculation: Dustbin[] = [];
-  private driverDetailsForChips: any[] = [];
+  driverDetailsForChips: any[] = [];
   private dustbinsLocationForCollection: { location: LatLngLiteral, stopover: boolean }[] = [];
   origin: LatLngLiteral = { lat: 0, lng: 0 };
   destination: LatLngLiteral = { lat: 0, lng: 0 };
-  private driversByRegion: Driver[] = [];
+  driversByRegion: Driver[] = [];
   private driversForRouteAssigned: Driver[] = [];
-  private isAssignindLoading: boolean = false;
-  private atLeastOneDriverAssigned: boolean = false;
-  private routeAssignedList: { driverName: string, dustbinsAssigned: Waypoints[] }[] = [];
+  isAssignindLoading = false;
+  private atLeastOneDriverAssigned = false;
+  routeAssignedList: { driverName: string, dustbinsAssigned: Waypoints[] }[] = [];
 
   constructor(private regionalAdminService: RegionalAdminService, private authService: AuthService, private dialog: MatDialog) {}
 
@@ -66,7 +66,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy {
     this.driverSub = this.regionalAdminService.getAllDriversByRegionUpdated()
       .subscribe(driversData => {
         this.driversByRegion = driversData;
-        var temp: {driverName: string, driverEmail: string, driverCapacity: number}[] = [];
+        const temp: {driverName: string, driverEmail: string, driverCapacity: number}[] = [];
         this.driversByRegion.forEach(element => {
           if (element.isRouteAssigned) {
             temp.push({ driverName: element.name, driverEmail: element.emailId, driverCapacity: element.capacity });
@@ -78,20 +78,24 @@ export class RegionalAdminComponent implements OnInit , OnDestroy {
   }
 
   calculateRouteForDrivers(driverDetails: any) {
-    var driverDetailsForRouteCalculation: {driverName: string, driverEmail: string, driverCapacity: number}[] = driverDetails;
+    // tslint:disable-next-line: prefer-const
+    let driverDetailsForRouteCalculation: {driverName: string, driverEmail: string, driverCapacity: number}[] = driverDetails;
     this.regionalAdminService.getAllDustbinsByRegion(localStorage.getItem('regionCode'));
     this.regionalAdminService.getAllDustbinsByRegionDataListener()
       .subscribe(dustbinLocations => {
         this.dustbinLocationForRouteCalculation = dustbinLocations;
-        var tempDustbinsToCollect: Dustbin[] = [];
+        // tslint:disable-next-line: prefer-const
+        let tempDustbinsToCollect: Dustbin[] = [];
         this.dustbinLocationForRouteCalculation.forEach(element => {
           if (element.status > 50) {
             tempDustbinsToCollect.push(element);
           }
         });
+        // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < driverDetailsForRouteCalculation.length; i++) {
-          var temp: Waypoints[] = [];
-          var temp2: any;
+          // tslint:disable-next-line: prefer-const
+          let temp: Waypoints[] = [];
+          let temp2: any;
           if (tempDustbinsToCollect.length < driverDetailsForRouteCalculation[i].driverCapacity) {
             temp2 = tempDustbinsToCollect.length;
           } else {
@@ -101,8 +105,8 @@ export class RegionalAdminComponent implements OnInit , OnDestroy {
             temp.push({ location: tempDustbinsToCollect[j].location, stopover: true });
           }
           // check not add if already available!
-          var a = temp.indexOf(temp[0]);
-          var b = temp.indexOf(temp[temp.length - 1])
+          const a = temp.indexOf(temp[0]);
+          const b = temp.indexOf(temp[temp.length - 1]);
           this.routeAssignedList.push({ driverName: driverDetailsForRouteCalculation[i].driverName, dustbinsAssigned: temp });
           tempDustbinsToCollect.splice(a, b - a + 1);
         }
@@ -134,7 +138,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy {
         this.getDriversByRegion(localStorage.getItem('regionCode'));
         this.isAssignindLoading = false;
       });
-      window.location.reload();
+    window.location.reload();
   }
 
 
