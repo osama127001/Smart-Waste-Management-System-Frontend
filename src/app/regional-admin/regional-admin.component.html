@@ -2,77 +2,81 @@
 
 <body>
   <br>
-  <div class="container" style="border: 1px solid black;">
-    <div style="display: flex;">
-      <div style="border-right: 1px solid black; padding-right: 50px;">
-        <h3 class="display-4">{{adminDetails?.region}}</h3>
-      </div>
-      <div style="flex: 1; padding-left: 50px;">
-        <p class="display-4">{{adminDetails?.name}}</p>
-      </div>  
-    </div>
-    <hr>
-    <div>
-      <div class="map-and-driver-list-parent">
-        <div class="map-of-parent">
-          <app-maps
-            [dustbinsData]="dustbinsLocation" 
-            [areaLatitude]="adminDetails?.location.lat" 
-            [areaLongitude]="adminDetails?.location.lng"
-            [routeAssignedList]="routeAssignedList">
-          </app-maps>
+  <div class="main-page">
+    <div class="main-page-container">
+      <div class="container" style="border: 1px solid black;">
+        <div style="display: flex;">
+          <div style="border-right: 1px solid black; padding-right: 50px;">
+            <h3 class="display-4">{{adminDetails?.region}}</h3>
+          </div>
+          <div style="flex: 1; padding-left: 50px;">
+            <p class="display-4">{{adminDetails?.name}}</p>
+          </div>
         </div>
-        <div class="list-of-drivers overflow-auto">
-          <div style="display: flex;" *ngIf="driversByRegion.length === 0">
-            <div style="margin: auto;">
-              <p><strong>No Drivers are assigned to this region!</strong></p>
+        <hr>
+        <div>
+          <div class="map-and-driver-list-parent">
+            <div class="map-of-parent">
+              <app-maps
+                [dustbinsData]="dustbinsLocation"
+                [areaLatitude]="adminDetails?.location.lat"
+                [areaLongitude]="adminDetails?.location.lng"
+                [routeAssignedList]="routeAssignedList">
+              </app-maps>
+            </div>
+            <div class="list-of-drivers overflow-auto">
+              <div style="display: flex;" *ngIf="driversByRegion.length === 0">
+                <div style="margin: auto;">
+                  <p><strong>No Drivers are assigned to this region!</strong></p>
+                </div>
+              </div>
+              <div class="list-group" style="border: 1px solid black;">
+                <a class="list-group-item list-group-item-action flex-column align-items-start driver-list" *ngFor="let driver of driversByRegion" style="background-color: #f2f2f2;">
+                  <button class="close" aria-label="Example icon button with a vertical three dot icon" [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>Edit</button>
+                    <button mat-menu-item>Delete</button>
+                  </mat-menu>
+                  <div class="d-flex justify-content-between">
+                    <h5 class="mb-1">{{ driver.name }}</h5>
+                    <p style="margin-top: 20px;">
+                      <!-- <span class="badge badge-primary">5</span> -->
+                    </p>
+                  </div>
+                  <p class="mb-1">Capacity: <strong>{{driver.capacity}}</strong></p>
+                  <div style="display: flex;">
+                    <div style="flex: 1;">
+                      <small>Phone: {{driver.cellNo}}</small>
+                    </div>
+                    <div>
+                      <button mat-stroked-button color="basic" *ngIf="!driver.isRouteAssigned" (click)="onToggleRouteAssigned(driver.emailId)">Apply Route</button>
+                      <button mat-raised-button color="warn" *ngIf="driver.isRouteAssigned" (click)="onToggleRouteAssigned(driver.emailId)">Cancel Route</button>
+                    </div>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
-          <div class="list-group" style="border: 1px solid black;">
-            <a class="list-group-item list-group-item-action flex-column align-items-start driver-list" *ngFor="let driver of driversByRegion" style="background-color: #f2f2f2;">
-              <button class="close" aria-label="Example icon button with a vertical three dot icon" [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item>Edit</button>
-                <button mat-menu-item>Delete</button>
-              </mat-menu>
-              <div class="d-flex justify-content-between">
-                <h5 class="mb-1">{{ driver.name }}</h5>
-                <p style="margin-top: 20px;">
-                  <!-- <span class="badge badge-primary">5</span> -->
-                </p>
-              </div>
-              <p class="mb-1">Capacity: <strong>{{driver.capacity}}</strong></p>
+          <hr>
+          <div class="parent-flex">
+            <div class="childflex1">
+              <mat-chip-list>
+                <mat-chip *ngFor="let driver of driverDetailsForChips">{{driver.driverName}}</mat-chip>
+                <div class="spinner-border" role="status" *ngIf="isAssignindLoading" style="margin-left: 20px;">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </mat-chip-list>
+            </div>
+            <div class="childflex2" style="flex: 3;">
               <div style="display: flex;">
-                <div style="flex: 1;">
-                  <small>Phone: {{driver.cellNo}}</small>  
-                </div>
+                <div style="flex: 1;"></div>
                 <div>
-                  <button mat-stroked-button color="basic" *ngIf="!driver.isRouteAssigned" (click)="onToggleRouteAssigned(driver.emailId)">Apply Route</button>
-                  <button mat-raised-button color="warn" *ngIf="driver.isRouteAssigned" (click)="onToggleRouteAssigned(driver.emailId)">Cancel Route</button>
+                  <button mat-raised-button color="accent" style="margin-right: 10px;" (click)="openAddDriverForm()">Add Driver</button>
+                  <button mat-raised-button color="accent" (click)="openAddDustbinForm()">Add Dustbin</button>
                 </div>
               </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <hr>
-      <div class="parent-flex">
-        <div class="childflex1">
-          <mat-chip-list>
-            <mat-chip *ngFor="let driver of driverDetailsForChips">{{driver.driverName}}</mat-chip>
-            <div class="spinner-border" role="status" *ngIf="isAssignindLoading" style="margin-left: 20px;">
-              <span class="sr-only">Loading...</span>
-            </div>
-          </mat-chip-list>
-        </div>
-        <div class="childflex2" style="flex: 3;">
-          <div style="display: flex;">
-            <div style="flex: 1;"></div>
-            <div>
-              <button mat-raised-button color="accent" style="margin-right: 10px;" (click)="openAddDriverForm()">Add Driver</button>
-              <button mat-raised-button color="accent" (click)="openAddDustbinForm()">Add Dustbin</button>    
             </div>
           </div>
         </div>

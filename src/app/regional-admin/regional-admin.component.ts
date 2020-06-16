@@ -16,7 +16,7 @@ import { Waypoints } from '../dustbins/waypoints.model';
   templateUrl: './regional-admin.component.html',
   styleUrls: ['./regional-admin.component.css']
 })
-export class RegionalAdminComponent implements OnInit , OnDestroy{
+export class RegionalAdminComponent implements OnInit , OnDestroy {
 
 
   private adminDetails: Admin;
@@ -41,8 +41,8 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
 
   ngOnInit() {
     this.getRegionDetails(localStorage.getItem('regionCode'));
-    this.getDustbinsForLocation(localStorage.getItem('regionCode')); 
-    this.getDriversByRegion(localStorage.getItem('regionCode')); 
+    this.getDustbinsForLocation(localStorage.getItem('regionCode'));
+    this.getDriversByRegion(localStorage.getItem('regionCode'));
   }
 
   getRegionDetails(regionCode: string) {
@@ -132,7 +132,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy{
     this.routeAssignedSub = this.regionalAdminService.getRouteAssignedListener()
       .subscribe(data => {
         this.getDriversByRegion(localStorage.getItem('regionCode'));
-        this.isAssignindLoading = false;        
+        this.isAssignindLoading = false;
       });
       window.location.reload();
   }

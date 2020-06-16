@@ -1,6 +1,5 @@
 .container {
     background-color: #f2f2f2;
-    height: 92%;
     padding: 70px;
     border-radius: 15px;
     padding-top: 40px;
@@ -12,10 +11,19 @@
     }
 }
 
+.main-page {
+  height: 100vh;
+  display: flex;
+}
+
+.main-page-container {
+  margin: auto;
+  width: 100%;
+}
 
 body {
     background-color: #e6e6e6;
-    height: 803px;
+    margin: 0;
 }
 
 button {
@@ -48,10 +56,10 @@ button {
 
 
 /* hr {
-    position: relative; 
-    top: 20px; 
-    border: none; 
-    height: 2px; 
-    background: black; 
+    position: relative;
+    top: 20px;
+    border: none;
+    height: 2px;
+    background: black;
     margin-bottom: 50px;
 } */
