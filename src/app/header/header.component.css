@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Roboto:wght@100;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
 
 .navbar-nav.navbar-center {
   position: absolute;
@@ -20,8 +21,8 @@ button {
 .navbar-brand {
   font-size: 30px;
   color: #ff9a00;
-  font-family: 'Fredoka One', cursive;
-  /* font-family: 'Alfa Slab One', cursive; */
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
 }
 
 .navbar {
@@ -36,9 +37,9 @@ a {
   color: white;
   outline: none;
   text-decoration: none;
-  font-size: large;
+  font-size: medium;
+  font-family: 'Roboto', sans-serif;
 }
-
 
 a:hover {
   color: #ff9a00;
