@@ -26,6 +26,9 @@ export class AuthService {
   // timer for the expiration of token
   private tokenTimer: any;
 
+  // checks if user is in the Homepage
+  isHomepage = false;
+
   // contructor with dependency injections
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -38,7 +41,7 @@ export class AuthService {
   getIsAuth() {
     return this.isAuthenticated;
   }
-  
+
   // observable listener for the authentication boolean
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
@@ -61,7 +64,8 @@ export class AuthService {
   userLogin(data: { email: string, password: string }) {
     // check the domain of the email to send the request respectively.
     if (data.email.split('@')[1] === 'superadmin.com' || data.email.split('@')[1] === 'admin.com') {
-      this.http.post<{ message: string, user: string, token: string, expiresIn: number, regionCode: string }>(this.backendLink + '/api/admin/adminlogin', data)
+      this.http.post<{ message: string, user: string, token: string, expiresIn: number, regionCode: string }>
+        (this.backendLink + '/api/admin/adminlogin', data)
         .subscribe((response) => {
           console.log(response);
           const token = response.token;
@@ -84,7 +88,8 @@ export class AuthService {
           }
         });
     } else if (data.email.split('@')[1] !== 'superadmin.com' || data.email.split('@')[1] !== 'admin.com') {
-      this.http.post<{ message: string, user: string, token: string, expiresIn: number }>(this.backendLink + '/api/customer/customerlogin', data)
+      this.http.post<{ message: string, user: string, token: string, expiresIn: number }>
+        (this.backendLink + '/api/customer/customerlogin', data)
         .subscribe((response) => {
           console.log(response);
           const token = response.token;
@@ -156,7 +161,7 @@ export class AuthService {
   // setting timer for the expiration of the token.
   private setAuthTimer(duration: number) {
      console.log('Setting Timer: ' + duration);
-    this.tokenTimer = setTimeout(() => {
+     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);
   }
