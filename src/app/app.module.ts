@@ -33,6 +33,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
 import { DriverComponent } from './driver/driver.component';
 
+require('dotenv').config();
+
 
 @NgModule({
   declarations: [
@@ -70,7 +72,7 @@ import { DriverComponent } from './driver/driver.component';
     FormsModule,
     MatProgressSpinnerModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDhzLpQzGJkZWVMY0EeojVFwgyoZpHgTH0'
+      apiKey: '${process.env.API_KEY}'
     })
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthIntercerptor, multi: true }],
