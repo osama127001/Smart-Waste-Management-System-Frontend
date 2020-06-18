@@ -1,3 +1,7 @@
 a {
   text-decoration: none;
 }
+
+.row {
+  overflow: hidden;
+}
