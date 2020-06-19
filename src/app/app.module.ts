@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ViewChild } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,8 +32,6 @@ import { AddDriverComponent } from './regional-admin/add-driver/add-driver.compo
 import { MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
 import { DriverComponent } from './driver/driver.component';
-
-require('dotenv').config();
 
 
 @NgModule({
@@ -72,11 +70,12 @@ require('dotenv').config();
     FormsModule,
     MatProgressSpinnerModule,
     AgmCoreModule.forRoot({
-      apiKey: '${process.env.API_KEY}'
+      apiKey: ''
     })
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthIntercerptor, multi: true }],
   bootstrap: [AppComponent],
   entryComponents: [AddAdminComponent, AddDustbinComponent, AddDriverComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}

@@ -8,6 +8,7 @@ import { MapsComponent } from './maps/maps.component';
 import { RegionalAdminComponent } from './regional-admin/regional-admin.component';
 import { CustomerComponent } from './customer/customer.component';
 import { AuthGuard } from './auth/auth.guard';
+import { DriverComponent } from './driver/driver.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'superadmin', component: SuperAdminComponent, canActivate: [AuthGuard]},
   { path: 'maps', component: MapsComponent},
   { path: 'regionaladmin', component: RegionalAdminComponent, canActivate: [AuthGuard]},
-  { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard]},
+  { path: 'customer', component: CustomerComponent},
+  { path: 'driver', component: DriverComponent},
 ];
 
 @NgModule({
