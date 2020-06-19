@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# blocking package-lock.json file as it is creating problems in github repo
+package-lock.json
+
 # environment variable
 .env
 
