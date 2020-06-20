@@ -87,7 +87,25 @@ export class AuthService {
             this.router.navigate(['/regionaladmin']);
           }
         });
-    } else if (data.email.split('@')[1] !== 'superadmin.com' || data.email.split('@')[1] !== 'admin.com') {
+    } else if (data.email.split('@')[1] === 'driver.com') {
+      this.http.post<{ message: string, user: string, token: string, expiresIn: number }>(this.backendLink + '/api/driver/driverLogin', data)
+        .subscribe((response) => {
+          console.log(response);
+          const token = response.token;
+          this.token = token;
+          const expiresInDuration = response.expiresIn;
+          this.setAuthTimer(expiresInDuration);
+          this.authStatusListener.next(true);
+          const now = new Date();
+          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+          this.saveAuthData(token, expirationDate);
+          console.log(expirationDate);
+          this.isAuthenticated = true;
+          // localStorage.setItem('regionCode', response.regionCode);
+          // localStorage.setItem('region', response.regionCode);
+          this.router.navigate(['/driver']);
+        });
+    } else if (data.email.split('@')[1] !== 'superadmin.com' || data.email.split('@')[1] !== 'admin.com' || data.email.split('@')[1] !== 'driver.com') {
       this.http.post<{ message: string, user: string, token: string, expiresIn: number }>
         (this.backendLink + '/api/customer/customerlogin', data)
         .subscribe((response) => {
