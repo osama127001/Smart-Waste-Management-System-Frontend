@@ -16,7 +16,7 @@ import { Waypoints } from '../dustbins/waypoints.model';
   templateUrl: './regional-admin.component.html',
   styleUrls: ['./regional-admin.component.css']
 })
-export class RegionalAdminComponent implements OnInit , OnDestroy {
+export class RegionalAdminComponent implements OnInit, OnDestroy {
 
 
   adminDetails: Admin;
@@ -24,6 +24,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy {
   private routeAssignedSub: Subscription;
   private dustbinSub: Subscription;
   private driverSub: Subscription;
+  private dustbinsForRouteCalculationSub: Subscription;
   dustbinsLocation: Dustbin[] = [];
   private dustbinLocationForRouteCalculation: Dustbin[] = [];
   driverDetailsForChips: any[] = [];
@@ -34,9 +35,9 @@ export class RegionalAdminComponent implements OnInit , OnDestroy {
   private driversForRouteAssigned: Driver[] = [];
   isAssignindLoading = false;
   private atLeastOneDriverAssigned = false;
-  routeAssignedList: { driverName: string, dustbinsAssigned: Waypoints[] }[] = [];
+  routeAssignedList: { driverName: string, driverEmail: string, dustbinsAssigned: Waypoints[] }[] = [];
 
-  constructor(private regionalAdminService: RegionalAdminService, private authService: AuthService, private dialog: MatDialog) {}
+  constructor(private regionalAdminService: RegionalAdminService, private authService: AuthService, private dialog: MatDialog) { }
 
 
   ngOnInit() {
@@ -66,7 +67,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy {
     this.driverSub = this.regionalAdminService.getAllDriversByRegionUpdated()
       .subscribe(driversData => {
         this.driversByRegion = driversData;
-        const temp: {driverName: string, driverEmail: string, driverCapacity: number}[] = [];
+        const temp: { driverName: string, driverEmail: string, driverCapacity: number }[] = [];
         this.driversByRegion.forEach(element => {
           if (element.isRouteAssigned) {
             temp.push({ driverName: element.name, driverEmail: element.emailId, driverCapacity: element.capacity });
@@ -79,9 +80,9 @@ export class RegionalAdminComponent implements OnInit , OnDestroy {
 
   calculateRouteForDrivers(driverDetails: any) {
     // tslint:disable-next-line: prefer-const
-    let driverDetailsForRouteCalculation: {driverName: string, driverEmail: string, driverCapacity: number}[] = driverDetails;
+    let driverDetailsForRouteCalculation: { driverName: string, driverEmail: string, driverCapacity: number }[] = driverDetails;
     this.regionalAdminService.getAllDustbinsByRegion(localStorage.getItem('regionCode'));
-    this.regionalAdminService.getAllDustbinsByRegionDataListener()
+    this.dustbinsForRouteCalculationSub = this.regionalAdminService.getAllDustbinsByRegionDataListener()
       .subscribe(dustbinLocations => {
         this.dustbinLocationForRouteCalculation = dustbinLocations;
         // tslint:disable-next-line: prefer-const
@@ -107,7 +108,11 @@ export class RegionalAdminComponent implements OnInit , OnDestroy {
           // check not add if already available!
           const a = temp.indexOf(temp[0]);
           const b = temp.indexOf(temp[temp.length - 1]);
-          this.routeAssignedList.push({ driverName: driverDetailsForRouteCalculation[i].driverName, dustbinsAssigned: temp });
+          this.routeAssignedList.push({ 
+            driverName: driverDetailsForRouteCalculation[i].driverName, 
+            driverEmail: driverDetailsForRouteCalculation[i].driverEmail,
+            dustbinsAssigned: temp 
+          });
           tempDustbinsToCollect.splice(a, b - a + 1);
         }
         console.log(this.routeAssignedList);
@@ -132,7 +137,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy {
   onToggleRouteAssigned(email: string) {
     this.driverSub.unsubscribe();
     this.isAssignindLoading = true;
-    this.regionalAdminService.toggleDriverRouteAssigned({emailId: email});
+    this.regionalAdminService.toggleDriverRouteAssigned({ emailId: email });
     this.routeAssignedSub = this.regionalAdminService.getRouteAssignedListener()
       .subscribe(data => {
         this.getDriversByRegion(localStorage.getItem('regionCode'));
@@ -149,6 +154,7 @@ export class RegionalAdminComponent implements OnInit , OnDestroy {
     }
     this.dustbinSub.unsubscribe();
     this.driverSub.unsubscribe();
+    this.dustbinsForRouteCalculationSub.unsubscribe();
   }
 
 

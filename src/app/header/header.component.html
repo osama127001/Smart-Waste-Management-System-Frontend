@@ -21,7 +21,7 @@
         <li><a href="#contact">Contact</a></li>
         <li><a routerLink="/login" *ngIf="!userIsAuthenticated">Log in</a></li>
         <li><a routerLink="/signup" *ngIf="!userIsAuthenticated">Sign Up</a></li>
-        <li><a href="" *ngIf="userIsAuthenticated" (click)="onLogout()">Log out</a></li>
+        <li><a href="/login" *ngIf="userIsAuthenticated" (click)="onLogout()">Log out</a></li>
         <!-- <li class="menu-has-children"><a href="">Drop Down</a>
           <ul>
             <li><a href="#">Drop Down 1</a></li>

@@ -88,7 +88,7 @@ export class AuthService {
           }
         });
     } else if (data.email.split('@')[1] === 'driver.com') {
-      this.http.post<{ message: string, user: string, token: string, expiresIn: number, email: string }>(this.backendLink + '/api/driver/driverLogin', data)
+      this.http.post<{ message: string, user: string, token: string, expiresIn: number, email: string, driverRegionCode: string }>(this.backendLink + '/api/driver/driverLogin', data)
         .subscribe((response) => {
           console.log(response);
           const token = response.token;
@@ -102,6 +102,7 @@ export class AuthService {
           console.log(expirationDate);
           this.isAuthenticated = true;
           localStorage.setItem('driver-email', response.email);
+          localStorage.setItem('driver-region-code', response.driverRegionCode);
           // localStorage.setItem('region', response.regionCode);
           this.router.navigate(['/driver']);
         });
