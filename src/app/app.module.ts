@@ -70,7 +70,7 @@ import { DriverComponent } from './driver/driver.component';
     FormsModule,
     MatProgressSpinnerModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBWqW2K_TNktAoxkA-EilYPHZ6aD1iYUqs'
+      apiKey: ''
     })
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthIntercerptor, multi: true }],
