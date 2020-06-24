@@ -19,8 +19,10 @@ export class DriverComponent implements OnInit, OnDestroy {
   private driverDetailsSub: Subscription;
   private driverSub: Subscription;
   driversByRegion: Driver[] = [];
+  driverDetails: any;
   private dustbinLocationForRouteCalculation: Dustbin[] = [];
   routeAssignedList: { driverName: string, driverEmail: string, dustbinsAssigned: Waypoints[] }[] = [];
+  routeAssignedListForDriver: { driverName: string, driverEmail: string, dustbinsAssigned: Waypoints[] }[] = [];
 
 
 
@@ -34,6 +36,7 @@ export class DriverComponent implements OnInit, OnDestroy {
     this.driverDetailsSub = this.driverService.getDriverDetailsUpdatedListener()
       .subscribe((driverDetailsFromBackend) => {
         console.log(driverDetailsFromBackend);
+        this.driverDetails = driverDetailsFromBackend;
       });
   }
 
@@ -90,6 +93,12 @@ export class DriverComponent implements OnInit, OnDestroy {
           tempDustbinsToCollect.splice(a, b - a + 1);
         }
         console.log(this.routeAssignedList);
+        this.routeAssignedList.forEach(element => {
+          if (element.driverEmail === localStorage.getItem('driver-email')) {
+            this.routeAssignedListForDriver.push(element);
+          }
+        });
+        console.log(this.routeAssignedListForDriver);
       });
   }
 

@@ -4,9 +4,21 @@
         <br><br><br><br><br><br>
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-md-12 col-lg-12">
+                <div class="col-xs-12 col-md-12 col-lg-12 col">
+                    <div style="display: flex;">
+                        <div style="border-right: 1px solid black; padding-right: 50px;">
+                          <h3 class="display-4">{{driverDetails?.name}}</h3>
+                        </div>
+                        <div style="flex: 1; padding-left: 50px;">
+                          <p class="display-4">{{driverDetails?.region}}</p>
+                        </div>
+                    </div>       
+                    <hr>       
                     <div class="map">
-                        <app-maps></app-maps>
+                        <app-maps
+                            [dustbinsData]="routeAssignedListForDriver.dustbinsAssigned"
+                            [routeAssignedList]="routeAssignedListForDriver">       
+                        </app-maps>
                     </div>
                 </div>
             </div>
