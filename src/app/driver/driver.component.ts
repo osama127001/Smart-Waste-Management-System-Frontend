@@ -23,6 +23,8 @@ export class DriverComponent implements OnInit, OnDestroy {
   private dustbinLocationForRouteCalculation: Dustbin[] = [];
   routeAssignedList: { driverName: string, driverEmail: string, dustbinsAssigned: Waypoints[] }[] = [];
   routeAssignedListForDriver: { driverName: string, driverEmail: string, dustbinsAssigned: Waypoints[] }[] = [];
+  dustbinsLocation: Waypoints[] = [];
+
 
 
 
@@ -98,6 +100,7 @@ export class DriverComponent implements OnInit, OnDestroy {
             this.routeAssignedListForDriver.push(element);
           }
         });
+        this.dustbinsLocation = this.routeAssignedListForDriver[0].dustbinsAssigned;
         console.log(this.routeAssignedListForDriver);
       });
   }

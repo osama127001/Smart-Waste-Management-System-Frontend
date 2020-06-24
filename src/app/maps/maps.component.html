@@ -1,23 +1,22 @@
-
-
 <div>
 
   <div class="borderOfMap border-dark">
-    <agm-map #gm (mapReady)="onMapReady($event)" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+    <agm-map #gm (mapReady)="onMapReady($event)" [latitude]="latitude" [longitude]="latitude" [zoom]="zoom">
 
       <agm-direction *ngFor="let route of routeAssignedList" 
        [origin]="route?.dustbinsAssigned[0].location"
        [destination]="route?.dustbinsAssigned[routeAssignedList[0]?.dustbinsAssigned?.length - 1]?.location"
        [waypoints]="route?.dustbinsAssigned"
+       [renderOptions]="customRenderOptions"
       ></agm-direction>
       
-      <ng-content></ng-content>
-
       <agm-marker *ngFor="let dustbinData of dustbinsData"
         [latitude]="dustbinData.location.lat"
         [longitude]="dustbinData.location.lng"
         (mouseOver)="onMouseOver(infoWindow, gm)"
-        (mouseOut)="onMouseOut(infoWindow, gm)">
+        (mouseOut)="onMouseOut(infoWindow, gm)"
+        [iconUrl]="customIconUrl"
+      >
 
         <agm-info-window #infoWindow>
           <div style="margin-bottom: 10px;">
@@ -32,7 +31,7 @@
         </agm-info-window>
 
       </agm-marker>
-ß
+
     </agm-map>
   </div>
 

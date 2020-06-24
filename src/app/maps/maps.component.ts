@@ -31,15 +31,29 @@ export class MapsComponent implements OnInit {
   // waypoints of the path generated
   @Input('routeAssignedList') routeAssignedList: { driverName: string, dustbinsAssigned: Waypoints[] }[] = [];
 
+  // Custom Render Options
+  customRenderOptions = {
+    suppressMarkers: true,
+    height: 100,
+    width: 100
+  };
 
+  // Custom Marker
+  customIconUrl = {
+    url: '../assets/img/dbin2.png',
+    scaledSize: {
+      width: 20,
+      height: 30
+    }
+  };
 
   zoom = 15;
-  // origin: { lat: number, lng: number } = {
+  // originTest: { lat: number, lng: number } = {
   //   lat: 33.692386,
   //   lng: 73.005635
   // };
 
-  // destination: { lat: number, lng: number } = {
+  // destinationTest: { lat: number, lng: number } = {
   //   lat: 33.722854,
   //   lng: 73.080363
   // }
