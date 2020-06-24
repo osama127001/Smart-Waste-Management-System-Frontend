@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'maps', component: MapsComponent},
   { path: 'regionaladmin', component: RegionalAdminComponent, canActivate: [AuthGuard]},
   { path: 'customer', component: CustomerComponent},
-  { path: 'driver', component: DriverComponent},
+  { path: 'driver', component: DriverComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
