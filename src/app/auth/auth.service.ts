@@ -78,6 +78,7 @@ export class AuthService {
           this.saveAuthData(token, expirationDate);
           console.log(expirationDate);
           this.isAuthenticated = true;
+          localStorage.setItem('userType', response.user);
           if (response.user === 'superadmin') {
             this.router.navigate(['/superadmin']);
           } else {
@@ -105,6 +106,7 @@ export class AuthService {
           localStorage.setItem('driver-region-code', response.driverRegionCode);
           // localStorage.setItem('region', response.regionCode);
           this.router.navigate(['/driver']);
+          localStorage.setItem('userType', response.user);
         });
     } else if (data.email.split('@')[1] !== 'superadmin.com' || data.email.split('@')[1] !== 'admin.com' || data.email.split('@')[1] !== 'driver.com') {
       this.http.post<{ message: string, user: string, token: string, expiresIn: number }>
@@ -122,6 +124,7 @@ export class AuthService {
           console.log(expirationDate);
           this.isAuthenticated = true;
           this.router.navigate(['/customer'])
+          localStorage.setItem('userType', response.user);
         });
     } else {
       console.log('Please Enter Valid Email!');
@@ -149,7 +152,6 @@ export class AuthService {
     this.token = null;
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
-    this.router.navigate(['/login']);
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
   }

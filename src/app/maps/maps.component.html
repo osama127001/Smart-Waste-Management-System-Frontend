@@ -1,7 +1,7 @@
 <div>
 
   <div class="borderOfMap border-dark">
-    <agm-map #gm (mapReady)="onMapReady($event)" [latitude]="latitude" [longitude]="latitude" [zoom]="zoom">
+    <agm-map #gm (mapReady)="onMapReady($event)" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
 
       <agm-direction *ngFor="let route of routeAssignedList" 
        [origin]="route?.dustbinsAssigned[0].location"

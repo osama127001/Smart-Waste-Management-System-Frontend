@@ -51,6 +51,7 @@ export class RegionalAdminComponent implements OnInit, OnDestroy {
     this.adminDetailsSub = this.regionalAdminService.getRegionalAdminDetailsListener()
       .subscribe((adminDetailsResponse) => {
         this.adminDetails = adminDetailsResponse;
+        console.log(this.adminDetails);
       });
   }
 
