@@ -7,7 +7,7 @@
        [origin]="route?.dustbinsAssigned[0].location"
        [destination]="route?.dustbinsAssigned[routeAssignedList[0]?.dustbinsAssigned?.length - 1]?.location"
        [waypoints]="route?.dustbinsAssigned"
-       [renderOptions]="customRenderOptions"
+       [renderOptions]="route?.customRenderOptions"
       ></agm-direction>
       
       <agm-marker *ngFor="let dustbinData of dustbinsData"

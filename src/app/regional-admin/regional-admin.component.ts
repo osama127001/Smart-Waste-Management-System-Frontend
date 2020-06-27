@@ -10,6 +10,7 @@ import { AddDustbinComponent } from './add-dustbin/add-dustbin.component';
 import { AddDriverComponent } from './add-driver/add-driver.component';
 import { Driver } from '../driver/driver.model';
 import { Waypoints } from '../dustbins/waypoints.model';
+import { RenderOptions } from './render-options.model';
 
 @Component({
   selector: 'app-regional-admin',
@@ -35,7 +36,15 @@ export class RegionalAdminComponent implements OnInit, OnDestroy {
   private driversForRouteAssigned: Driver[] = [];
   isAssignindLoading = false;
   private atLeastOneDriverAssigned = false;
-  routeAssignedList: { driverName: string, driverEmail: string, dustbinsAssigned: Waypoints[] }[] = [];
+  routeAssignedList: { driverName: string, driverEmail: string, customRenderOptions: RenderOptions, dustbinsAssigned: Waypoints[] }[] = [];
+  routeColors: string [] = [
+    '#00f', // blue
+    '#0f0', // green
+    '#950', // red
+    '#ff0', //yellow
+    '#e7f', //light blue
+    '#000', // black
+  ];
 
   constructor(private regionalAdminService: RegionalAdminService, private authService: AuthService, private dialog: MatDialog) { }
 
@@ -60,6 +69,7 @@ export class RegionalAdminComponent implements OnInit, OnDestroy {
     this.dustbinSub = this.regionalAdminService.getAllDustbinsByRegionDataListener()
       .subscribe((dustbinData) => {
         this.dustbinsLocation = dustbinData;
+        console.log(this.dustbinsLocation);
       });
   }
 
@@ -112,12 +122,14 @@ export class RegionalAdminComponent implements OnInit, OnDestroy {
           this.routeAssignedList.push({ 
             driverName: driverDetailsForRouteCalculation[i].driverName, 
             driverEmail: driverDetailsForRouteCalculation[i].driverEmail,
+            customRenderOptions: { suppressMarkers: true, height: 100, width: 100, polylineOptions: { strokeColor: this.routeColors[i] } },
             dustbinsAssigned: temp 
           });
           tempDustbinsToCollect.splice(a, b - a + 1);
         }
         console.log(this.routeAssignedList);
       });
+      this.driverSub.unsubscribe();
   }
 
   openAddDustbinForm() {

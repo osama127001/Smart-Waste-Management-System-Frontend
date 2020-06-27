@@ -35,7 +35,8 @@ export class MapsComponent implements OnInit {
   customRenderOptions = {
     suppressMarkers: true,
     height: 100,
-    width: 100
+    width: 100,
+    polylineOptions: { strokeColor: '#00f' }
   };
 
   // Custom Marker
