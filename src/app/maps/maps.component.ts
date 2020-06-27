@@ -3,6 +3,7 @@ import { google } from 'google-maps';
 import { Dustbin } from '../dustbins/dustbin.model';
 import { LatLngLiteral } from '@agm/core';
 import { Waypoints } from '../dustbins/waypoints.model';
+import { RenderOptions } from '../regional-admin/render-options.model';
 
 declare var google: google;
 
@@ -14,10 +15,10 @@ declare var google: google;
 export class MapsComponent implements OnInit {
 
   // tslint:disable-next-line: no-input-rename
-  @Input('areaLatitude') latitude: number;
+  @Input('areaLatitude') latitude: number = 0;
 
   // tslint:disable-next-line: no-input-rename
-  @Input('areaLongitude') longitude: number;
+  @Input('areaLongitude') longitude: number = 0;
 
   // tslint:disable-next-line: no-input-rename
   @Input('dustbinsData') dustbinsData: Dustbin[] = [];
@@ -29,13 +30,12 @@ export class MapsComponent implements OnInit {
   @Input('destination') destination: LatLngLiteral = { lat: 0, lng: 0 };
 
   // waypoints of the path generated
-  @Input('routeAssignedList') routeAssignedList: { driverName: string, dustbinsAssigned: Waypoints[] }[] = [];
+  @Input('routeAssignedList') routeAssignedList: { driverName: string, driverEmail: string, customRenderOptions: RenderOptions, dustbinsAssigned: Waypoints[], origin: Waypoints, destination: Waypoints }[] = [];
+
 
   // Custom Render Options
   customRenderOptions = {
     suppressMarkers: true,
-    height: 100,
-    width: 100,
     polylineOptions: { strokeColor: '#00f' }
   };
 
@@ -70,6 +70,7 @@ export class MapsComponent implements OnInit {
     trafficLayer.setMap(mapInstance);
   }
 
+
   onMouseOver(infoWindow, gm) {
     gm.lastOpen = infoWindow;
     infoWindow.open();
@@ -79,8 +80,6 @@ export class MapsComponent implements OnInit {
     gm.lastOpen = infoWindow;
     infoWindow.close();
   }
-
-
 
 
 }

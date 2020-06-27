@@ -21,8 +21,8 @@ export class DriverComponent implements OnInit, OnDestroy {
   driversByRegion: Driver[] = [];
   driverDetails: any;
   private dustbinLocationForRouteCalculation: Dustbin[] = [];
-  routeAssignedList: { driverName: string, driverEmail: string, dustbinsAssigned: Waypoints[] }[] = [];
-  routeAssignedListForDriver: { driverName: string, driverEmail: string, dustbinsAssigned: Waypoints[] }[] = [];
+  routeAssignedList: { driverName: string, driverEmail: string, customRenderOptions: { suppressMarkers: boolean }, dustbinsAssigned: Waypoints[], origin: Waypoints, destination: Waypoints }[] = [];
+  routeAssignedListForDriver: { driverName: string, driverEmail: string, customRenderOptions: { suppressMarkers: boolean }, dustbinsAssigned: Waypoints[], origin: Waypoints, destination: Waypoints }[] = [];
   dustbinsLocation: Waypoints[] = [];
 
 
@@ -90,17 +90,19 @@ export class DriverComponent implements OnInit, OnDestroy {
           this.routeAssignedList.push({ 
             driverName: driverDetailsForRouteCalculation[i].driverName, 
             driverEmail: driverDetailsForRouteCalculation[i].driverEmail,
-            dustbinsAssigned: temp 
+            dustbinsAssigned: temp,
+            origin: temp[0],
+            customRenderOptions: { suppressMarkers: true },
+            destination: temp[temp.length - 1]
           });
           tempDustbinsToCollect.splice(a, b - a + 1);
-        }
-        console.log(this.routeAssignedList);
+        }        
         this.routeAssignedList.forEach(element => {
           if (element.driverEmail === localStorage.getItem('driver-email')) {
             this.routeAssignedListForDriver.push(element);
           }
         });
-        this.dustbinsLocation = this.routeAssignedListForDriver[0].dustbinsAssigned;
+        this.dustbinsLocation = this.routeAssignedListForDriver[0].dustbinsAssigned;        
         console.log(this.routeAssignedListForDriver);
       });
   }

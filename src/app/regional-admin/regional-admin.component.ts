@@ -36,13 +36,13 @@ export class RegionalAdminComponent implements OnInit, OnDestroy {
   private driversForRouteAssigned: Driver[] = [];
   isAssignindLoading = false;
   private atLeastOneDriverAssigned = false;
-  routeAssignedList: { driverName: string, driverEmail: string, customRenderOptions: RenderOptions, dustbinsAssigned: Waypoints[] }[] = [];
+  routeAssignedList: { driverName: string, driverEmail: string, customRenderOptions: RenderOptions, dustbinsAssigned: Waypoints[], origin: Waypoints, destination: Waypoints }[] = [];
   routeColors: string [] = [
     '#00f', // blue
-    '#0f0', // green
     '#950', // red
-    '#ff0', //yellow
+    '#0f0', // green
     '#e7f', //light blue
+    '#ff0', //yellow
     '#000', // black
   ];
 
@@ -69,7 +69,6 @@ export class RegionalAdminComponent implements OnInit, OnDestroy {
     this.dustbinSub = this.regionalAdminService.getAllDustbinsByRegionDataListener()
       .subscribe((dustbinData) => {
         this.dustbinsLocation = dustbinData;
-        console.log(this.dustbinsLocation);
       });
   }
 
@@ -122,14 +121,19 @@ export class RegionalAdminComponent implements OnInit, OnDestroy {
           this.routeAssignedList.push({ 
             driverName: driverDetailsForRouteCalculation[i].driverName, 
             driverEmail: driverDetailsForRouteCalculation[i].driverEmail,
-            customRenderOptions: { suppressMarkers: true, height: 100, width: 100, polylineOptions: { strokeColor: this.routeColors[i] } },
-            dustbinsAssigned: temp 
+            customRenderOptions: { suppressMarkers: true, polylineOptions: { strokeColor: this.routeColors[i] } },
+            dustbinsAssigned: temp,
+            origin: temp[0],
+            destination: temp[temp.length - 1],
           });
           tempDustbinsToCollect.splice(a, b - a + 1);
         }
+        for (let i = 0; i < this.routeAssignedList.length; i++) {
+          this.routeAssignedList[i].dustbinsAssigned.splice(0, 1); // deleting first element
+          this.routeAssignedList[i].dustbinsAssigned.splice(this.routeAssignedList[i].dustbinsAssigned.length - 1, 1); // deleting last element
+        }
         console.log(this.routeAssignedList);
       });
-      this.driverSub.unsubscribe();
   }
 
   openAddDustbinForm() {
