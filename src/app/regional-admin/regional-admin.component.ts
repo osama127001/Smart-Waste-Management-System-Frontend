@@ -40,8 +40,8 @@ export class RegionalAdminComponent implements OnInit, OnDestroy {
   routeColors: string [] = [
     '#00f', // blue
     '#950', // red
-    '#0f0', // green
     '#e7f', //light blue
+    '#0f0', // green
     '#ff0', //yellow
     '#000', // black
   ];

@@ -63,7 +63,7 @@
           <div class="parent-flex">
             <div class="childflex1">
               <mat-chip-list>
-                <mat-chip *ngFor="let driver of driverDetailsForChips">{{driver.driverName}}</mat-chip>
+                <mat-chip *ngFor="let driver of driverDetailsForChips" color="00f" selected>{{driver.driverName}}</mat-chip>
                 <div class="spinner-border" role="status" *ngIf="isAssignindLoading" style="margin-left: 20px;">
                   <span class="sr-only">Loading...</span>
                 </div>

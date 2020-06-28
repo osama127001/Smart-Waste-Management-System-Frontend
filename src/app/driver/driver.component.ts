@@ -23,14 +23,25 @@ export class DriverComponent implements OnInit, OnDestroy {
   private dustbinLocationForRouteCalculation: Dustbin[] = [];
   routeAssignedList: { driverName: string, driverEmail: string, customRenderOptions: { suppressMarkers: boolean }, dustbinsAssigned: Waypoints[], origin: Waypoints, destination: Waypoints }[] = [];
   routeAssignedListForDriver: { driverName: string, driverEmail: string, customRenderOptions: { suppressMarkers: boolean }, dustbinsAssigned: Waypoints[], origin: Waypoints, destination: Waypoints }[] = [];
-  dustbinsLocation: Waypoints[] = [];
+  dustbinsLocation: Dustbin[] = [];
+  private dustbinSub: Subscription;
 
 
 
 
   ngOnInit() {
     this.getDriverDetailsByEmailId(localStorage.getItem('driver-email'));
+    this.getDustbinsForLocation(localStorage.getItem('driver-region-code'));
     this.getDriversByRegion(localStorage.getItem('driver-region-code'));
+  }
+
+  getDustbinsForLocation(region: string) {
+    this.regionalAdminService.getAllDustbinsByRegion(region);
+    this.dustbinSub = this.regionalAdminService.getAllDustbinsByRegionDataListener()
+      .subscribe((dustbinData) => {
+        this.dustbinsLocation = dustbinData;
+        console.log(this.dustbinsLocation);
+      });
   }
 
   getDriverDetailsByEmailId(email: string) {
@@ -102,7 +113,6 @@ export class DriverComponent implements OnInit, OnDestroy {
             this.routeAssignedListForDriver.push(element);
           }
         });
-        this.dustbinsLocation = this.routeAssignedListForDriver[0].dustbinsAssigned;        
         console.log(this.routeAssignedListForDriver);
       });
   }
@@ -111,6 +121,7 @@ export class DriverComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.driverDetailsSub.unsubscribe();
     this.driverSub.unsubscribe();
+    this.dustbinSub.unsubscribe();
   }
 
 }

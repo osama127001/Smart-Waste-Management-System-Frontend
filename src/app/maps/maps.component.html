@@ -7,8 +7,13 @@
        [origin]="route?.origin.location"
        [destination]="route?.destination.location"
        [waypoints]="route?.dustbinsAssigned"
-       [renderOptions]="route?.customRenderOptions"
-      ></agm-direction>
+       [renderOptions]="route?.customRenderOptions">
+
+        <agm-info-window [isOpen]="true">
+          <p>hello</p>
+        </agm-info-window>
+      
+      </agm-direction>
       
       <agm-marker *ngFor="let dustbinData of dustbinsData"
         [latitude]="dustbinData.location.lat"
