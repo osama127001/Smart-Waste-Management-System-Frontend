@@ -70,6 +70,7 @@ export class DriverComponent implements OnInit, OnDestroy {
 
   calculateRouteForDrivers(driverDetails: any) {
     // tslint:disable-next-line: prefer-const
+    console.log(driverDetails);
     let driverDetailsForRouteCalculation: { driverName: string, driverEmail: string, driverCapacity: number }[] = driverDetails;
     this.regionalAdminService.getAllDustbinsByRegion(localStorage.getItem('driver-region-code'));
     this.regionalAdminService.getAllDustbinsByRegionDataListener()

@@ -89,6 +89,7 @@ export class RegionalAdminComponent implements OnInit, OnDestroy {
   }
 
   calculateRouteForDrivers(driverDetails: any) {
+    console.log(driverDetails);
     // tslint:disable-next-line: prefer-const
     let driverDetailsForRouteCalculation: { driverName: string, driverEmail: string, driverCapacity: number }[] = driverDetails;
     this.regionalAdminService.getAllDustbinsByRegion(localStorage.getItem('regionCode'));
