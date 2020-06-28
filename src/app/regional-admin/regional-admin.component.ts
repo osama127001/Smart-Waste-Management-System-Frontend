@@ -129,10 +129,6 @@ export class RegionalAdminComponent implements OnInit, OnDestroy {
           });
           tempDustbinsToCollect.splice(a, b - a + 1);
         }
-        for (let i = 0; i < this.routeAssignedList.length; i++) {
-          this.routeAssignedList[i].dustbinsAssigned.splice(0, 1); // deleting first element
-          this.routeAssignedList[i].dustbinsAssigned.splice(this.routeAssignedList[i].dustbinsAssigned.length - 1, 1); // deleting last element
-        }
         console.log(this.routeAssignedList);
       });
   }

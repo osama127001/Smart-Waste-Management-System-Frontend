@@ -3,25 +3,22 @@
   <div class="borderOfMap border-dark">
     <agm-map #gm (mapReady)="onMapReady($event)" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
 
-      <agm-direction *ngFor="let route of routeAssignedList" 
-       [origin]="route?.origin.location"
-       [destination]="route?.destination.location"
-       [waypoints]="route?.dustbinsAssigned"
-       [renderOptions]="route?.customRenderOptions">
+      <agm-direction *ngFor="let route of routeAssignedList" [origin]="route?.origin.location"
 
-        <agm-info-window [isOpen]="true">
-          <p>hello</p>
-        </agm-info-window>
-      
+        [destination]="route?.destination.location" [waypoints]="route?.dustbinsAssigned"
+        [renderOptions]="route?.customRenderOptions">
+
+        <agm-marker *ngFor="let markDustbinWithAssignedRoute of route?.dustbinsAssigned"
+          [latitude]="markDustbinWithAssignedRoute?.location.lat"
+          [longitude]="markDustbinWithAssignedRoute?.location.lng">
+        </agm-marker>
+
       </agm-direction>
-      
-      <agm-marker *ngFor="let dustbinData of dustbinsData"
-        [latitude]="dustbinData.location.lat"
-        [longitude]="dustbinData.location.lng"
-        (mouseOver)="onMouseOver(infoWindow, gm)"
-        (mouseOut)="onMouseOut(infoWindow, gm)"
-        [iconUrl]="customIconUrl"
-      >
+
+
+      <agm-marker *ngFor="let dustbinData of dustbinsData" [latitude]="dustbinData.location.lat"
+        [longitude]="dustbinData.location.lng" (mouseOver)="onMouseOver(infoWindow, gm)"
+        (mouseOut)="onMouseOut(infoWindow, gm)" [iconUrl]="customIconUrl">
 
         <agm-info-window #infoWindow [disableAutoPan]="true">
           <p>Yes</p>
