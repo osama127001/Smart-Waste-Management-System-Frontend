@@ -1,0 +1,21 @@
+.close {
+    outline: none;
+}
+
+body {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+}
+
+.map-border {
+    border: 3px solid black;
+}
+
+agm-map {
+    height: 350px;
+}
+
+button {
+    outline: none;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-coordinates',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddCoordinatesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
+
+  onCloseDialog() {
+    this.dialog.closeAll();
+  }
 
   ngOnInit() {
   }

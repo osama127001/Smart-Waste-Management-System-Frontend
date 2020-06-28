@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { AddCoordinatesComponent } from './add-coordinates/add-coordinates.component';
 
 
 @Component({
@@ -12,7 +14,7 @@ export class SignupComponent implements OnInit {
 
   isMatching = true;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -29,6 +31,14 @@ export class SignupComponent implements OnInit {
     }
     const fullName = form.value.firstName + ' ' + form.value.lastName;
     this.authService.userSignUp( {name: fullName, email: form.value.email, password: form.value.password} );
+  }
+
+  openAddCoordinatesForm() {
+    this.dialog.open(AddCoordinatesComponent, {
+      disableClose: true,
+      width: '600px',
+      height: '800px'
+    });
   }
 
 }
