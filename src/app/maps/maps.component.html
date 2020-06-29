@@ -21,7 +21,6 @@
         (mouseOut)="onMouseOut(infoWindow, gm)" [iconUrl]="customIconUrl">
 
         <agm-info-window #infoWindow [disableAutoPan]="true">
-          <p>Yes</p>
           <div>
             <div style="margin-bottom: 10px;">
               <h5><kbd>Details</kbd></h5>
@@ -30,7 +29,7 @@
               <p><strong>Dustbin ID: </strong>{{ dustbinData.id }}</p>
               <p><strong>Region: </strong>{{ dustbinData.region }}</p>
               <p><strong>Address: </strong>{{ dustbinData.address }}</p>
-              <p><strong>Status: </strong><kbd>{{ dustbinData.status }}</kbd></p>
+              <p><strong>Status: </strong><kbd>{{ dustbinData.status }}%</kbd></p>
             </div>
           </div>
         </agm-info-window>
