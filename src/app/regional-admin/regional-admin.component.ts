@@ -122,7 +122,7 @@ export class RegionalAdminComponent implements OnInit, OnDestroy {
           this.routeAssignedList.push({ 
             driverName: driverDetailsForRouteCalculation[i].driverName, 
             driverEmail: driverDetailsForRouteCalculation[i].driverEmail,
-            customRenderOptions: { suppressMarkers: true, polylineOptions: { strokeColor: this.routeColors[i] } },
+            customRenderOptions: { suppressMarkers: true, polylineOptions: { strokeColor: this.routeColors[i], strokeOpacity: 0.5, strokeWeight: 6 } },
             dustbinsAssigned: temp,
             origin: temp[0],
             destination: temp[temp.length - 1],

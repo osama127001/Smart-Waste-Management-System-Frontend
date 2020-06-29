@@ -1,8 +1,8 @@
 .super-admin-container {
   background-color: #f2f2f2;
   padding: 70px;
-  height: 90%;
   border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
 
 .card {
@@ -22,7 +22,7 @@ mat-expansion-panel {
 }
 
 body {
-  height: 2000px;
+  height: 100%;
   background-color: #e6e6e6;
 }
 

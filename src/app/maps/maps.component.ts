@@ -48,6 +48,15 @@ export class MapsComponent implements OnInit {
     }
   };
 
+  // Custom Marker when route assigned
+  customIconUrl2 = {
+    url: '../assets/img/red.png',
+    scaledSize: {
+      width: 20,
+      height: 30
+    }
+  };
+
   zoom = 15;
   // originTest: { lat: number, lng: number } = {
   //   lat: 33.692386,
