@@ -160,6 +160,10 @@ export class RegionalAdminComponent implements OnInit, OnDestroy {
     window.location.reload();
   }
 
+  onDeleteDriver(email: string) {
+    console.log(email);
+    this.regionalAdminService.deleteDriver(email);
+  }
 
   ngOnDestroy() {
     this.adminDetailsSub.unsubscribe();

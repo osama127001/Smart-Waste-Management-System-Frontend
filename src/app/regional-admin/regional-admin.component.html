@@ -37,7 +37,7 @@
                   </button>
                   <mat-menu #menu="matMenu">
                     <button mat-menu-item>Edit</button>
-                    <button mat-menu-item>Delete</button>
+                    <button mat-menu-item (click)="onDeleteDriver(driver.emailId)">Delete</button>
                   </mat-menu>
                   <div class="d-flex justify-content-between">
                     <h5 class="mb-1">{{ driver.name }}</h5>

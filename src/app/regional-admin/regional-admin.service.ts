@@ -90,6 +90,13 @@ export class RegionalAdminService {
       });
   }
 
+  deleteDriver(email: string) {
+    this.http.delete(this.backendLink + '/api/driver/delete-driver/' + email)
+      .subscribe((resp) => {
+        console.log(resp);
+      });
+  }
+
   toggleDriverRouteAssigned(email: {emailId: string}) {
     this.http.put<{message: string}>(this.backendLink + '/api/driver/toggle-route-assigned', email)
       .subscribe(response => {
