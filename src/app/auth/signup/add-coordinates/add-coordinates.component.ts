@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-coordinates',
@@ -8,13 +9,17 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AddCoordinatesComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private http: HttpClient) { }
 
   onCloseDialog() {
     this.dialog.closeAll();
   }
 
   ngOnInit() {
+  }
+
+  getAllRegionNamesAndLocations() {
+    
   }
 
 }

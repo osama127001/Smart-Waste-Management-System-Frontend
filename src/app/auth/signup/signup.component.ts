@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
     this.dialog.open(AddCoordinatesComponent, {
       disableClose: true,
       width: '600px',
-      height: '800px'
+      height: '900px'
     });
   }
 
