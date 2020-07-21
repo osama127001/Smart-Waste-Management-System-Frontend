@@ -8,14 +8,12 @@
     <hr>
     <p>Find the location of your house and click on it to fill the coordinates.</p>
 
-    <div class="dropdown">
+    <div class="dropright">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Select Region
+          {{buttonStartText}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" onclick="return false;" href="#" (click)="onSelectRegion(region.regionName)" *ngFor="let region of regionNamesAndLocations">{{region.regionName}}</a>
         </div>
     </div>
 
@@ -76,7 +74,7 @@
         <div class="dflex1" style="flex: 1;">
         </div>
         <div>
-            <button mat-flat-button color="accent" type="submit" (click)="onAddDustbin(onAddDustbinForm)"> + Add Co-ordinates</button>
+            <button mat-flat-button color="accent" type="submit"> + Add Co-ordinates</button>
         </div>
     </div>
 
