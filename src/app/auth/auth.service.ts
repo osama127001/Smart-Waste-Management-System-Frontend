@@ -29,6 +29,9 @@ export class AuthService {
   // checks if user is in the Homepage
   isHomepage = false;
 
+  // data of regions and names and locations
+  private regionNamesAndLocations = new Subject<any>();
+
   // contructor with dependency injections
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -58,6 +61,19 @@ export class AuthService {
       .subscribe((result) => {
         console.log(result);
       });
+  }
+
+  // get all regions names and region co-ordinates for signup
+  getRegionCoordsAndNamesForSignup() {
+    this.http.get(this.backendLink + '/api/customer/get-region-names-and-locations')
+      .subscribe((result) => {
+        this.regionNamesAndLocations.next(result);
+      });
+  }
+
+  // regions data and location listener
+  getRegionCoordsAndNamesForSignupListener() {
+    return this.regionNamesAndLocations.asObservable();
   }
 
   // User Login Request

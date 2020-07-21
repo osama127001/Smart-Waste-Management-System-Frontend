@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-coordinates',
@@ -9,17 +10,25 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AddCoordinatesComponent implements OnInit {
 
-  constructor(private dialog: MatDialog, private http: HttpClient) { }
+  constructor(private dialog: MatDialog, private authService: AuthService) { }
+
+  // subscriptions
+  private regionNamesAndLocationSub: Subscription;
 
   onCloseDialog() {
     this.dialog.closeAll();
   }
 
   ngOnInit() {
+    this.getAllRegionNamesAndLocations();
   }
 
   getAllRegionNamesAndLocations() {
-    
+    this.authService.getRegionCoordsAndNamesForSignup();
+    this.regionNamesAndLocationSub = this.authService.getRegionCoordsAndNamesForSignupListener()
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 
 }
