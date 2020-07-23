@@ -13,7 +13,7 @@
           {{buttonStartText}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" onclick="return false;" href="#" (click)="onSelectRegion(region.regionName)" *ngFor="let region of regionNamesAndLocations">{{region.regionName}}</a>
+          <a class="dropdown-item" onclick="return false;" href="#" (click)="onSelectRegion(region.regionName, region.regionCode, region.regionLocation)" *ngFor="let region of regionNamesAndLocations">{{region.regionName}}</a>
         </div>
     </div>
 
@@ -21,11 +21,10 @@
 
     <div class="map-editing-flex">
         <div class="map-border">
-            <agm-map (mapClick)="onMapClick($event)" [latitude]="addAddAdminMapLatitude" [longitude]="addAddAdminMapLongitude" [zoom]="15">
-                <agm-marker *ngFor="let loc of dustbinLocations" [latitude]="loc.location.lat" [longitude]="loc.location.lng"></agm-marker>
+            <agm-map (mapClick)="onMapClick($event)" [latitude]="addCoordsLat" [longitude]="addCoordsLng" [zoom]="15">
                 <agm-marker [latitude]="formLatValue" [longitude]="formLngValue" [label]="{ color: 'white', text: '+' }">
                     <agm-info-window [isOpen]="true">
-                        <p><strong>Add Dustbin Here!</strong></p>
+                        <p><strong>I'm Here!</strong></p>
                     </agm-info-window>
                 </agm-marker>
             </agm-map>
@@ -74,7 +73,7 @@
         <div class="dflex1" style="flex: 1;">
         </div>
         <div>
-            <button mat-flat-button color="accent" type="submit"> + Add Co-ordinates</button>
+            <button mat-flat-button color="accent" type="submit" (click)="onAddCoords()"> + Add Co-ordinates</button>
         </div>
     </div>
 

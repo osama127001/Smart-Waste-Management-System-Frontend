@@ -13,6 +13,8 @@ import { AddCoordinatesComponent } from './add-coordinates/add-coordinates.compo
 export class SignupComponent implements OnInit {
 
   isMatching = true;
+  private formLatValue: number;
+  private formLngValue: number;
 
   constructor(private authService: AuthService, private dialog: MatDialog) { }
 
@@ -34,10 +36,14 @@ export class SignupComponent implements OnInit {
   }
 
   openAddCoordinatesForm() {
-    this.dialog.open(AddCoordinatesComponent, {
+    const dialogRef = this.dialog.open(AddCoordinatesComponent, {
       disableClose: true,
       width: '600px',
       height: '900px'
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      this.formLatValue = data.dustbinLocation.lat;
+      this.formLngValue = data.dustbinLocation.lng;
     });
   }
 
