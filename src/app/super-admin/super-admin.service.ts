@@ -49,4 +49,11 @@ export class SuperAdminService {
       });
   }
 
+  deleteRegionBySuperAdmin(regionalAdminCnic: string) {
+    this.http.delete(this.backendLink + '/api/admin/delete-region/' + regionalAdminCnic)
+      .subscribe(data => {
+        console.log(data);
+      })
+  }
+
 }

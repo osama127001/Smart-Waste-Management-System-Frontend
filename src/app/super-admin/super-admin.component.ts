@@ -35,6 +35,7 @@ export class SuperAdminComponent implements OnInit, OnDestroy {
     this.superAdminService.getAllAdmins();
     this.adminSub = this.superAdminService.getAdminsUpdateListener()
       .subscribe((AdminsData) => {
+        console.log(AdminsData);
         this.allAdminsData = AdminsData;
       });
   }
@@ -58,6 +59,12 @@ export class SuperAdminComponent implements OnInit, OnDestroy {
         this.origin = this.waypoints[0].location;
         this.destination = this.waypoints[0].location;
       });
+  }
+
+  deleteRegion(regionToDelete: string) {
+    console.log(regionToDelete);
+    this.superAdminService.deleteRegionBySuperAdmin(regionToDelete);
+    window.location.reload();
   }
 
 

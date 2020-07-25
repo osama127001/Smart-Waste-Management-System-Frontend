@@ -27,7 +27,9 @@
               <h4>{{admin?.region}}</h4>
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <p>map!</p>
+          <p>Region's Admin Email: <kbd>{{admin.emailId}}</kbd></p> 
+          <p>Region's Admin Cell No.: <kbd>{{admin.cellNo}}</kbd></p> 
+          <p>Region's Admin Cnic: <kbd>{{admin.cnic}}</kbd></p> 
           <app-maps 
             [dustbinsData]="dustbinsByRegion" 
             [areaLatitude]='admin?.location.lat' 
@@ -35,8 +37,7 @@
             <!-- <agm-direction [origin]="origin" destination="destination"></agm-direction> -->
           </app-maps>
           <mat-action-row>
-            <button mat-raised-button color="primary" class="action-button action-button-moredetails">More Details</button>
-            <button mat-fab color="warn" class="action-button-delete action-button" aria-label="Example icon button with a delete icon">
+            <button (click)="deleteRegion(admin.cnic)" mat-fab color="warn" class="action-button-delete action-button" aria-label="Example icon button with a delete icon">
               <mat-icon>delete</mat-icon>
             </button>    
           </mat-action-row>
